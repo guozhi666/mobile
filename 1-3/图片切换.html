@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style type="text/css">
+        * {
+            margin: 0;
+            padding: 0;
+        }
+        ul{
+            list-style: none;
+        }
+        img{
+            display: block;
+        }
+        #banner{
+            width: 805px;
+            height: 505px;
+            position: relative;
+            /*overflow: hidden;*/
+        }
+        #banner>li{
+            width: 805px;
+            height: 81px;
+            position: absolute;
+            top: 0;
+            left: 0;
+        }
+        #banner>li img{
+            width: 100%;
+        }
+        #banner>li.first{
+            z-index: 1;
+        }
+        #list{
+            height: 81px;
+            width: 805px;
+        }
+        #list>li{
+            float: left;
+            width: 130px;
+            height: 81px;
+            margin-right: 5px;
+        }
+
+        #list .last{
+            margin-right: 0;
+        }
+        #list li img{
+            width: 100%;
+        }
+        #banner li:target{
+            z-index: 2;
+        }
+    </style>
+</head>
+<body>
+
+<ul id="banner">
+    <li id="jd01" class="first"><img src="img/jd001.jpg" alt=""></li>
+    <li id="jd02"><img src="img/jd002.jpg" alt=""></li>
+    <li id="jd03"><img src="img/jd003.jpg" alt=""></li>
+    <li id="jd04"><img src="img/jd004.jpg" alt=""></li>
+    <li id="jd05"><img src="img/jd005.jpg" alt=""></li>
+    <li id="jd06"><img src="img/jd006.jpg" alt=""></li>
+</ul>
+<ul id="list">
+    <li><a href="#jd01"><img src="img/jd001.jpg" alt=""></a></li>
+    <li><a href="#jd02"><img src="img/jd002.jpg" alt=""></a></li>
+    <li><a href="#jd03"><img src="img/jd003.jpg" alt=""></a></li>
+    <li><a href="#jd04"><img src="img/jd004.jpg" alt=""></a></li>
+    <li><a href="#jd05"><img src="img/jd005.jpg" alt=""></a></li>
+    <li class="last"><a href="#jd06"><img src="img/jd006.jpg" alt=""></a></li>
+</ul>
+</body>
+<script type="text/javascript">
+
+</script>
+</html>

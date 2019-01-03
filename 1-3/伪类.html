@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style type="text/css">
+        * {
+            margin: 0;
+            padding: 0;
+        }
+        input[type = 'text']{
+            background: yellowgreen;
+            outline: none;
+        }
+        /*获取焦点的状态*/
+        input[type = 'text']:focus{
+            background: pink;
+        }
+        #box{
+            width: 100px;
+            height: 100px;
+            background: yellowgreen;
+            /*padding-top: 2000px;*/
+        }
+        #box:target{
+            border:10px solid grey;
+        }
+    </style>
+</head>
+<body>
+<input type="text">
+<a href="#box">target</a>
+<div id="box"></div>
+</body>
+<script type="text/javascript">
+
+</script>
+</html>

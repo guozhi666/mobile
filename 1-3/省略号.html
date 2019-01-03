@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style type="text/css">
+        * {
+            margin: 0;
+            padding: 0;
+        }
+        .box{
+            display: block;
+            width: 200px;
+            height: 50px;
+            background:yellowgreen;
+            margin: 100px 0 0 200px;
+
+            /*第一步，转换为块或者行内块*/
+            display: block;
+            /*第二步， 设置文本不换行*/
+            white-space: nowrap;
+            /*第三步 清除溢出部分*/
+            overflow: hidden;
+            /*第四步， 设置省略号*/
+            text-overflow:ellipsis;
+        }
+    </style>
+</head>
+<body>
+    <div class="box">
+        在我的后园，可以看见墙外有两株树，一株是枣树，还有一株也是枣树,在我的后园，可以看见墙外有两株树，一株是枣树，还有一株也是枣树
+    </div>
+</body>
+<script type="text/javascript">
+
+</script>
+</html>
