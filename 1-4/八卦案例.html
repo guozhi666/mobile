@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style type="text/css">
+        * {
+            margin: 0;
+            padding: 0;
+        }
+        body{
+            background: grey;
+        }
+        .box{
+            margin: 200px auto;
+            width: 200px;
+            height: 200px;
+            /*background: grey;*/
+            position: relative;
+            left: 0;
+            top: 0;
+        }
+        .baby{
+            /*animation: fengche 2s linear infinite;*/
+        }
+        @keyframes fengche {
+            0%{
+                transform: rotate(0deg);
+            }
+            100%{
+                transform: rotate(360deg);
+            }
+        }
+        .left{
+            height: 200px;
+            width: 100px;
+            background: #000;
+            float:left;
+            border-radius: 100px 0 0 100px;
+        }
+        .right{
+            height: 200px;
+            width: 100px;
+            background: white;
+            float:left;
+            border-radius: 0 100px 100px 0;
+        }
+        .top{
+            width: 100px;
+            height: 100px;
+            background: #000;
+            border-radius: 50%;
+            position: absolute;
+            top: 0;
+            left:50px;
+        }
+        .bottom{
+            width: 100px;
+            height: 100px;
+            background: white;
+            border-radius: 50%;
+            position: absolute;
+            top: 100px;
+            left:50px;
+        }
+        .toop{
+            width: 20px;
+            height: 20px;
+            background: white;
+            border-radius: 50%;
+            position: absolute;
+            top: 40px;
+            left:90px;
+        }
+        .bottomm{
+            width: 20px;
+            height: 20px;
+            background: #000;
+            border-radius: 50%;
+            position: absolute;
+            top: 140px;
+            left:90px;
+        }
+    </style>
+</head>
+<body>
+<div class="box">
+    <div class="baby">
+        <div class="left"></div>
+        <div class="right"></div>
+        <div class="top"></div>
+        <div class="bottom"></div>
+        <div class="toop"></div>
+        <div class="bottomm"></div>
+    </div>
+</div>
+</body>
+<script type="text/javascript">
+
+</script>
+</html>

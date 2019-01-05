@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style type="text/css">
+        * {
+            margin: 0;
+            padding: 0;
+        }
+        #list{
+            margin-top: 200px;
+            margin-left: 200px;
+            list-style: none;
+        }
+        #list li{
+            float: left;
+            margin-right: 5px;
+            width: 2px;
+            height: 8px;
+            background: #000;
+        }
+        #list li:last-child{
+            margin-right: 0;
+        }
+        li:nth-child(5n+1){
+            width: 4px;
+            height: 12px;
+        }
+    </style>
+</head>
+<body>
+<ul id="list">
+
+</ul>
+</body>
+<script type="text/javascript">
+    var list = document.getElementById('list');
+
+    for (var i = 0; i < 100; i++) {
+        var li = document.createElement('li');
+        list.appendChild(li);
+
+    }
+</script>
+</html>
