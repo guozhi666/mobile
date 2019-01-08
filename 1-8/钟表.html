@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style type="text/css">
+        * {
+            margin: 0;
+            padding: 0;
+        }
+        ul{
+            list-style: none;
+        }
+        a{
+            text-decoration: none;
+        }
+        img{
+            display: block;
+        }
+        #box{
+            width:300px;
+            height: 300px;
+            background: #f0f0f0;
+            margin: 100px auto 0;
+            position: relative;
+        }
+        #list li{
+            width: 2px;
+            height: 6px;
+            background: #000000;
+            position: absolute;
+            left: 149px;
+            top: 0;
+            transform-origin: 1px 150px;#list li
+        }
+        #list li:nth-child(5n + 1){
+            width: 4px;
+            height: 10px;
+        }
+        #hour{
+            width: 6px;
+            height: 60px;
+            background: #000;
+            position: absolute;
+            top:90px;
+            left:147px;
+            transform-origin: bottom;
+        }
+        #min{
+            width: 4px;
+            height: 80px;
+            background: #000000;
+            position: absolute;
+            top:70px;
+            left:148px;
+            transform-origin: bottom;
+        }
+        #sec{
+            width: 2px;
+            height: 100px;
+            background: #000000;
+            position: absolute;
+            top:50px;
+            left:149px;
+            transform-origin: bottom;
+        }
+        #icon{
+            width: 20px;
+            height: 20px;
+            background: yellowgreen;
+            border-radius: 50%;
+            position: absolute;
+            top:50%;
+            left: 50%;
+            transform: translate(-50%,-50%);
+        }
+    </style>
+</head>
+<body>
+    <div id="box">
+        <!--刻度-->
+        <ul id="list"></ul>
+        <!--时针-->
+        <div id="hour"></div>
+        <!--分针-->
+        <div id="min"></div>
+        <!--秒针-->
+        <div id="sec"></div>
+        <!--小圆球-->
+        <div id="icon"></div>
+    </div>
+</body>
+<script type="text/javascript">
+    var list = document.getElementById('list');
+    var hourDom = document.getElementById('hour');
+    var minDom = document.getElementById('min');
+    var secDom = document.getElementById('sec');
+
+
+
+    click();
+    setInterval(function(){
+        var date = new Date();
+        var min = date.getMinutes();
+        var sec = date.getSeconds();
+        var hour = date.getHours();
+        min = min + sec/60;
+        hour = hour + min/60;
+        secDom.style.transform = 'rotate(' + 6*sec + 'deg)';
+        minDom.style.transform = 'rotate(' + 6*min + 'deg)';
+        hourDom.style.transform = 'rotate(' + 30*hour + 'deg)';
+    }, 1000);
+
+
+    for (var i = 0; i < 60; i++) {
+        var lis = document.createElement('li');
+        lis.style.transform = 'rotate(' + 6*i + 'deg)';
+        list.appendChild(lis);
+    }
+
+    function click(){
+        var date = new Date();
+        var min = date.getMinutes();
+        var sec = date.getSeconds();
+        var hour = date.getHours();
+        min = min + sec/60;
+        hour = hour + min/60;
+        secDom.style.transform = 'rotate(' + 6*sec + 'deg)';
+        minDom.style.transform = 'rotate(' + 6*min + 'deg)';
+        hourDom.style.transform = 'rotate(' + 30*hour + 'deg)';
+    }
+</script>
+</html>

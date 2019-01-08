@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style type="text/css">
+        * {
+            margin: 0;
+            padding: 0;
+        }
+        img{
+            display: block;
+        }
+        #wrap{
+            margin: 100px auto;
+            position: relative;
+            /*transform:translate(-50% -50%);*/
+            overflow: hidden;
+        }
+        #cokeBg, #cokeCan{
+            position: absolute;
+            top: 0;
+            left: 0;
+        }
+        #cokeBg{
+            top: 10px;
+
+        }
+        #cokeBg img{
+            float: left;
+        }
+    </style>
+</head>
+<body>
+<div id="wrap">
+    <div id="cokeBg">
+        <img src="img/coke_bg.jpg" alt="">
+        <img src="img/coke_bg.jpg" alt="">
+    </div>
+    <div id="cokeCan">
+        <img src="img/coke_can.png" alt="">
+    </div>
+</div>
+</body>
+<script type="text/javascript">
+    var cokeBg = document.getElementById('cokeBg');
+    //获取第一个img
+    var Img = document.getElementsByTagName('img')[0];
+    var wrap = document.getElementById('wrap');
+    var cokeCan = document.getElementById('cokeCan');
+
+    //设置背景标签的宽高
+    cokeBg.style.width = Img.offsetWidth*2 + 'px';
+    cokeBg.style.height = Img.offsetHeight + 'px';
+
+    //设置罐子的宽高
+    var cokeCanWidth = cokeCan.offsetWidth;
+    var cokeCanHeight = cokeCan.offsetHeight;
+
+    //设置外盒子的大小
+    wrap.style.width = cokeCanWidth + 'px';
+    wrap.style.height = cokeCanHeight + 'px';
+    var num = 0;
+
+    //定时器
+    setInterval(function(){
+        num--;
+        if(Math.abs(num) >= Img.offsetWidth){
+            num = 0;
+        }
+        cokeBg.style.transform = 'translateX(' + num +'px)';
+    }, 10)
+</script>
+</html>

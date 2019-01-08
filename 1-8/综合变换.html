@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style type="text/css">
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        #box {
+            width: 200px;
+            height: 200px;
+            background: deeppink;
+
+            /* rotate旋转的同时，坐标轴也会发生旋转 */
+            /* 如果 rotate 写在 translate 之前，translate沿着新的坐标轴发生位移*/
+            transform: rotate(45deg) translateX(200px);
+            /* 如果scale写在 translate之前，元素大小发生缩放，translate中的位移值也会发生缩放*/
+            transform: scale(0.5) translateX(200px); /* 200px*0.5 = 100px */
+
+
+
+            /* 如果 skew 写在 translate 之前，translate沿着新的坐标轴发生位移*/
+            transform: skewX(45deg) translate(200px,0px);
+
+            transform: rotate(45deg) scale(0.5);
+            /* 如果 rotate 写在 skew 之前，skew沿着新的坐标轴发生扭曲*/
+            transform: rotate(45deg) skewX(45deg);
+
+            transform: scale(0.5) skewX(45deg);
+        }
+        #box2{
+            margin-top: 50px;
+            width: 200px;
+            height: 200px;
+            background:yellowgreen;
+
+            transform:translateX(200px) rotate(45deg);
+            transform: translateX(200px) scale(0.5);
+            transform: translate(200px,0px) skewX(45deg);
+            transform: scale(0.5) rotate(45deg);
+
+            transform: skewX(45deg) rotate(45deg);
+            transform: skewX(45deg) scale(0.5);
+        }
+    </style>
+</head>
+<body>
+<div id="box"></div>
+<div id="box2"></div>
+</body>
+<script type="text/javascript">
+
+</script>
+</html>
