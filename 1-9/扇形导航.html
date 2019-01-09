@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style type="text/css">
+        * {
+            margin: 0;
+            padding: 0;
+        }
+        ul{
+            list-style: none;
+        }
+        img{
+            display: block;
+        }
+        #wrap{
+            width: 49px;
+            height: 49px;
+            position: fixed;
+            bottom: 50px;
+            right: 50px;
+        }
+        #home{
+            width: 49px;
+            height: 49px;
+            background-image: url("img/home.png");
+            background-repeat: no-repeat;
+            position: absolute;
+            top: 0;
+            left: 0;
+            z-index: 5;
+            border-radius: 50%;
+            transition: 2s;
+        }
+        #list li{
+            position: absolute;
+            top: 4px;
+            left: 4px;
+            border-radius: 50%;
+            overflow: hidden;
+            /*transition: 1s;*/
+        }
+        #list li img{
+            /*border-radius: 50%;*/
+        }
+    </style>
+</head>
+<body>
+    <div id="wrap">
+        <div id="home"></div>
+        <ul id="list">
+            <li><img src="img/clos.png" alt=""></li>
+            <li><img src="img/full.png" alt=""></li>
+            <li><img src="img/open.png" alt=""></li>
+            <li><img src="img/prev.png" alt=""></li>
+            <li><img src="img/refresh.png" alt=""></li>
+        </ul>
+    </div>
+</body>
+<script type="text/javascript">
+    var home = document.querySelector('#home');
+    var liNode = document.querySelectorAll('#list li');
+    var flag = true;
+    var c = 150
+    home.onclick = function(){
+        if(flag){
+            //home逆时针旋转
+            home.style.transform = 'rotate(-360deg) scale(1)';
+
+            for (var i = 0; i < liNode.length; i++) {
+                //把小图弹出去
+                liNode[i].style.left = -getPoint(c, 90/(liNode.length-1)*i).left + 'px';
+                liNode[i].style.top = -getPoint(c, 90/(liNode.length-1)*i).top + 'px';
+                liNode[i].style.transition = '1s '+ 0.1*i +'s';
+                liNode[i].style.transform = 'rotate(-720deg) scale(1)'
+            }
+        }else{
+            //home顺时针旋转
+            home.style.transform = 'rotate(0deg) scale(1)';
+            for (var i = 0; i < liNode.length; i++) {
+                //把小图弹出去
+                liNode[i].style.left = 0 + 'px';
+                liNode[i].style.top = 0 + 'px';
+                liNode[i].style.transition = '1s '+ 0.1*(liNode.length-1-i) +'s';
+                liNode[i].style.transform = 'rotate(0deg) scale(1)'
+            }
+        };
+        //更新flag
+        flag = !flag;
+    }
+
+    //图片点击事件
+
+    for (var i = 0; i < liNode.length; i++) {
+        liNode[i].onclick = function(){
+            this.style.transform = 'rotate(-720deg) scale(1.5)';
+            //设置过度，把上面的过度覆盖
+            this.style.transition = '2s';
+            this.style.opacity = '0.5';
+
+            //检测过度结束 transitionend
+            //1.绑定addEventListener
+            //2.兼容性问题 webkitTransitionEnd
+            this.addEventListener('transitionend', fun);
+            this.addEventListener('webkitTransitionEnd', fun);
+
+            function fun(){
+                //元素变回原样
+                this.style.transform = 'rotate(-720deg) scale(1)';
+                this.style.opacity = '1';
+                this.style.transition = '0.1s';
+                //3.解除绑定
+                this.removeEventListener('transitionend', fun)
+                this.removeEventListener('webkitTransitionEnd', fun);
+            }
+        }
+
+    }
+    //确定元素位置
+    function getPoint(c, deg){
+        var left = c * Math.sin(Math.PI*deg/180);
+        var top = c * Math.cos(Math.PI*deg/180);
+        return {left:left, top:top}
+    }
+
+</script>
+</html>

@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style type="text/css">
+        * {
+            margin: 0;
+            padding: 0;
+        }
+        #box{
+            position: absolute;
+            top: 300px;
+            left: 200px;
+            width: 10px;
+            height: 10px;
+            background: pink;
+        }
+        .test{
+            position: absolute;
+            top: 300px;
+            left: 200px;
+            width: 0px;
+            height: 0px;
+            border: 1px solid #000000;
+        }
+    </style>
+</head>
+<body>
+<div id="box"></div>
+</body>
+<script type="text/javascript">
+    var box = document.getElementById('box');
+
+    var boxLeft = box.offsetLeft;
+    var boxTop = box.offsetTop;
+
+    var deg = 0;
+    var scale = 100;
+
+    setInterval(function(){
+        deg++;
+        box.style.left = boxLeft + deg*Math.PI/180 * scale *0.5+ 'px';
+        //
+        //sin内是弧度，不是角度，所以需要转换成弧度
+        box.style.top = boxTop + Math.sin(deg*Math.PI/180)*scale*2 + 'px';
+
+        //添加一个div,设置为每一个运动的黑点
+        var divDom = document.createElement('div');
+        divDom.className = 'test';
+        divDom.style.left = box.offsetLeft + 'px';
+        divDom.style.top = box.offsetTop + 'px';
+        document.body.appendChild(divDom);
+    }, 10)
+
+</script>
+</html>

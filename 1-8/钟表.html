@@ -97,19 +97,9 @@
     var secDom = document.getElementById('sec');
 
 
-
+    //调用封装的click函数
     click();
-    setInterval(function(){
-        var date = new Date();
-        var min = date.getMinutes();
-        var sec = date.getSeconds();
-        var hour = date.getHours();
-        min = min + sec/60;
-        hour = hour + min/60;
-        secDom.style.transform = 'rotate(' + 6*sec + 'deg)';
-        minDom.style.transform = 'rotate(' + 6*min + 'deg)';
-        hourDom.style.transform = 'rotate(' + 30*hour + 'deg)';
-    }, 1000);
+    setInterval(click, 1000);
 
 
     for (var i = 0; i < 60; i++) {
@@ -118,6 +108,7 @@
         list.appendChild(lis);
     }
 
+    //封装函数，封装指针的运动方式
     function click(){
         var date = new Date();
         var min = date.getMinutes();
