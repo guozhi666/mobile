@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style type="text/css">
+        * {
+            margin: 0;
+            padding: 0;
+        }
+        img{
+            display: block;
+        }
+        ul{
+            list-style: none;
+        }
+        #wrap{
+            width: 150px;
+            height: 150px;
+            margin: 200px auto 80px;
+
+
+        }
+        #wrap #list{
+            width: 150px ;
+            height: 150px;
+
+            transform-style: preserve-3d;
+            position: relative;
+
+            perspective: 2500px;
+            /*测试*/
+            /*transform: rotateY(2deg);*/
+
+        }
+        #wrap #list li{
+            width: 150px ;
+            height: 150px;
+            position: absolute;
+            top: 0;
+            left: 0;
+        }
+        /*#wrap #list li img:hover{*/
+            /*transform: scale(1.5);*/
+        /*}*/
+        #wrap #list img{
+            width: 150px ;
+            height: 150px;
+        }
+        #btns{
+            text-align: center;
+        }
+        #btn{
+            /*text-align: center;*/
+            /*width: 80px;*/
+            /*height: 40px;*/
+            /*font-size: 20px;*/
+        }
+    </style>
+</head>
+<body>
+    <div id="wrap">
+        <ul id="list">
+            <li><img src="img/img11.jpg" alt=""></li>
+            <li><img src="img/img12.jpg" alt=""></li>
+            <li><img src="img/img13.jpg" alt=""></li>
+            <li><img src="img/img14.jpg" alt=""></li>
+            <li><img src="img/img15.jpg" alt=""></li>
+            <li><img src="img/img16.jpg" alt=""></li>
+            <li><img src="img/img17.jpg" alt=""></li>
+            <li><img src="img/img18.jpg" alt=""></li>
+            <li><img src="img/img19.jpg" alt=""></li>
+        </ul>
+
+    </div>
+    <div id="btns">
+        <!--<button id="btn1">上一张</button>-->
+        <button id="btn2">下一张</button>
+    </div>
+</body>
+<script type="text/javascript">
+    var lis = document.getElementsByTagName('li');
+    // var btn1 = document.getElementById('btn1');
+    var btn2 = document.getElementById('btn2');
+    // var num1 = 0;
+    var num2 = 0;
+
+    for (var i = 0; i < lis.length; i++) {
+        lis[i].style.transform = 'rotateY(' + 360/lis.length*i + 'deg) translateZ(500px)';
+
+    }
+    // btn1.onclick = function(){
+    //     num1++;
+    //     for (var i = 0; i < lis.length; i++) {
+    //         lis[i].style.transition = '2s';
+    //         lis[i].style.transform = 'rotateY(' + (360/lis.length*i-360/lis.length*num1 ) + 'deg) translateZ(500px)';
+    //
+    //     }
+    // };
+    btn2.onclick = function(){
+        num2++;
+        for (var i = 0; i < lis.length; i++) {
+            lis[i].style.transition = '2s';
+            lis[i].style.transform = 'rotateY(' + (360/lis.length*num2 + 360/lis.length*i) + 'deg) translateZ(500px)';
+        }
+
+    }
+</script>
+</html>
