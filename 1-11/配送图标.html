@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style type="text/css">
+        * {
+            margin: 0;
+            padding: 0;
+        }
+        #wrap{
+            width: 90%;
+            margin: 200px auto 0;
+            display: flex;
+            justify-content:space-between;
+            position: relative;
+        }
+        #wrap:after{
+            content: '';
+
+            height: 1px;
+            width: 100%;
+            background: gray;
+            position: absolute;
+            top: 50%;
+            left: 0;
+        }
+        .box{
+            width: 15px;
+            height: 15px;
+            background-image: radial-gradient(red 50%,white 50%);
+            border-radius: 50%;
+            border: 1px solid red;
+
+            position: relative;
+            z-index: 1;
+
+            white-space: nowrap;
+        }
+        .box span{
+            color: #9c9c9c;
+            font-size: 12px;
+            position: absolute;
+            top:-20px;
+            left: -10px;
+        }
+    </style>
+</head>
+<body>
+<div id="wrap">
+    <div class="box"><span>已付款</span></div>
+    <div class="box"><span>配送中</span></div>
+    <div class="box"><span>已收货</span></div>
+    <div class="box"><span>未评价</span></div>
+</div>
+</body>
+<script type="text/javascript">
+
+</script>
+</html>

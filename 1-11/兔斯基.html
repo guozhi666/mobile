@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style type="text/css">
+        html{
+            height: 100%;
+        }
+        body{
+            height: 100%;
+
+            /*垂直居中方法一*/
+            /*display: flex;*/
+            /*justify-content:center;*/
+            /*align-items: center;*/
+
+            /*垂直居中方法二*/
+            display:-webkit-box;
+            -webkit-box-pack:center;
+            -webkit-box-align:center;
+
+        }
+        .box{
+            /*margin: 200px auto 0;*/
+            /*五种居中方式*/
+
+            /*垂直居中方法三*/
+            /*position: absolute;*/
+            /*left: 0;*/
+            /*top: 0;*/
+            /*right: 0;*/
+            /*bottom: 0;*/
+            /*margin: auto;*/
+
+            /*垂直居中方法四*/
+            /*position:absolute;*/
+            /*left: 50%;*/
+            /*top:50%;*/
+            /*transform:translate(-50% -50%);*/
+
+
+
+            width: 48px;
+            height: 48px;
+            background-image: url("img1/animation.png");
+            background-repeat: no-repeat;
+
+            animation-name: rubite;
+            animation-timing-function:steps(12);
+            animation-duration: 0.5s;
+            animation-iteration-count: infinite;
+        }
+        @keyframes rubite{
+            from{background-position: 0px 0px;}
+            to{background-position: -576px 0px}
+        }
+    </style>
+</head>
+<body>
+<div class="box"></div>
+</body>
+<script type="text/javascript">
+
+</script>
+</html>
