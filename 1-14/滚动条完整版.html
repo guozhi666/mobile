@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style type="text/css">
+        * {
+            margin: 0;
+            padding: 0;
+        }
+        html, body{
+            height: 100%;
+            overflow: hidden;
+        }
+        #box{
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 10px;
+            height: 100%;
+            background: gray;
+        }
+        #inner{
+            position: absolute;
+            left:0;
+            top:0;
+            width: 15px;
+            /*height: 30px;*/
+            background: pink;
+            margin-right: 10px;
+        }
+        #content{
+            position: absolute;
+            top: 0;
+            left: 0;
+        }
+    </style>
+</head>
+<body>
+<div id="content"></div>
+<div id="box">
+    <div id="inner"></div>
+</div>
+</body>
+<script type="text/javascript">
+    var box = document.getElementById('box');
+    var inner = document.getElementById('inner');
+    var content = document.getElementById('content');
+
+    //定义初始鼠标盒子位置；
+    var eleY = 0;
+    var startY = 0;
+
+    for (var i = 0; i < 300; i++) {
+        content.innerHTML += i + '<br/>'
+
+    }
+
+    // var scale1 = inner.offsetHeight / document.documentElement.clientHeight;
+    // inner.style.height = scale1 * (content.offsetHeight - document.documentElement.clientHeight);
+
+    var scale2 = document.documentElement.clientHeight/content.offsetHeight;
+    inner.style.height = scale2 * document.documentElement.clientHeight + 'px';
+
+    box.onmousedown = function(event){
+        event = event || window.event;
+        //开启全局捕获
+        inner.setCapture && inner.setCapture();
+        //获取初始数据
+        eleY = inner.offsetTop;
+        startY = event.clientY;
+
+
+
+        document.onmousemove = function(event){
+            event = event || window.event;
+            //获取移动后的鼠标位置
+            var endY = event.clientY;
+            //计算移动差；
+            var disY = endY - startY;
+
+            var innerTop = disY + eleY;
+            if(innerTop < 0){
+                innerTop = 0;
+            }else if(document.documentElement.clientHeight - inner.offsetHeight < innerTop){
+                innerTop = document.documentElement.clientHeight - inner.offsetHeight;
+            }
+
+            inner.style.top = innerTop + 'px';
+            //
+            // var scale = innerTop/(document.documentElement.clientHeight - inner.offsetHeight);
+            // content.style.top = -scale * (content.offsetHeight - document.documentElement.clientHeight) + 'px';
+
+            content.style.top = -innerTop / scale2 + 'px'
+        }
+
+        document.onmouseup = function(){
+            document.releaseCapture && document.releaseCapture();
+            document.onmousemove = null;
+            document.onmouseup = null
+        }
+        return false;
+    }
+
+    document.onmousewheel = fun;
+
+    if(document.addEventListener){
+        document.addEventListener('DOMMouseScroll', fun)
+    }
+
+    var flag = '';
+    var add = 0;
+    function fun(event){
+        event = event || window.event;
+
+        if(event.wheelDelta){
+            if(event.wheelDelta > 0 ){
+                flag = 'up';
+                add = -10;
+            }else{
+                flag = 'down';
+                add = 10;
+            }
+        }else if(event.detail){
+            if(event.detail < 0){
+                flag = 'up';
+                add = -5 ;
+            }else{
+                flag = 'down';
+                add = 5;
+            }
+        }
+
+        var innerOffset = inner.offsetTop + add ;
+        if(innerOffset < 0){
+            innerOffset = 0
+        }else if(innerOffset > document.documentElement.clientHeight - inner.offsetHeight){
+            innerOffset = document.documentElement.clientHeight - inner.offsetHeight;
+        }
+
+        switch (flag) {
+            case 'up':
+                inner.style.top = innerOffset + 'px';
+                // content.style.top = (inner.offsetTop + add)/scale2 + 'px';
+                content.style.top = -innerOffset/scale2 + 'px'
+            break;
+            case 'down':
+                inner.style.top =innerOffset+ 'px';
+                // content.style.top = (content.offsetTop- add)/scale2 + 'px';
+                content.style.top = -innerOffset/scale2 +'px';
+            break;
+
+        }
+        if(event.preventDefault){
+            event.prevenDefault();
+        }
+        return false;
+
+    }
+</script>
+</html>

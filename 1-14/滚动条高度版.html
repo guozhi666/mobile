@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style type="text/css">
+        * {
+            margin: 0;
+            padding: 0;
+        }
+        html,body{
+            height: 100%;
+            overflow: hidden;
+        }
+        #wrap{
+            position: absolute;
+            top:0;
+            right: 0;
+            width: 40px;
+            height: 100%;
+            background: grey;
+        }
+        #inner{
+            position: absolute;
+            top:0;
+            left: 0;
+            width: 40px;
+            /*height: 60px;*/
+            background: yellowgreen;
+        }
+        #content{
+            position: absolute;
+            top:0;
+            left: 0;
+        }
+
+
+    </style>
+</head>
+<body>
+<!--内容区域-->
+<div id="content">
+
+</div>
+
+<!--滑槽-->
+<div id="wrap">
+    <!--滑块-->
+    <div id="inner"></div>
+</div>
+
+</body>
+<script type="text/javascript">
+    window.onload = function () {
+        var content = document.getElementById('content');
+        var inner = document.getElementById('inner');
+
+        //造文本
+        for(var i=0;i<1000;i++){
+            content.innerHTML += i + '<br>'
+        };
+
+        //滚动条的高度
+        // 滑块/滑槽 = h/H = H/conH
+        var scaleH = document.documentElement.clientHeight/content.offsetHeight;
+        inner.style.height = scaleH * document.documentElement.clientHeight + 'px';
+
+        //定义元素初始位置
+        var eleY = 0;
+        //定义鼠标初始位置
+        var startY = 0;
+
+        //鼠标按下
+        inner.onmousedown = function (event) {
+            event = event || window.event;
+            //元素初始位置
+            eleY = inner.offsetTop;
+            //鼠标初始位置
+            startY = event.clientY;
+
+            //开启全局捕获
+            inner.setCapture && inner.setCapture();
+            //鼠标移动
+            document.onmousemove = function (event) {
+                event = event || window.event;
+                //鼠标结束位置
+                var endY = event.clientY;
+                //鼠标距离差
+                var disY = endY - startY;
+
+                //范围限定
+                var innerTop = eleY + disY;
+                if(innerTop < 0){
+                    innerTop = 0;
+                }else if(innerTop > document.documentElement.clientHeight - inner.offsetHeight){
+                    innerTop = document.documentElement.clientHeight - inner.offsetHeight
+                };
+
+                //确定元素最终位置 = 元素初始位置 + 鼠标距离差
+                inner.style.top = innerTop + 'px';
+
+                //确定内容区域的位置
+                // h(内容区域top) / H(内容高-屏幕高) = t(innerTop) / T(屏幕高-滚动条高)
+                var scale = innerTop/(document.documentElement.clientHeight - inner.offsetHeight);
+                content.style.top = -scale*(content.offsetHeight-document.documentElement.clientHeight)+ 'px';
+
+
+            };
+            //鼠标离开
+            document.onmouseup = function () {
+                //释放全局捕获
+                document.releaseCapture && document.releaseCapture();
+                document.onmousemove = document.onmouseup = null;
+            };
+
+            //禁止浏览器默认行为
+            return false;
+        };
+
+    }
+</script>
+</html>

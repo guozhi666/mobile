@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style type="text/css">
+        * {
+            margin: 0;
+            padding: 0;
+        }
+        body{
+            height: 1000px;
+        }
+        #box{
+            width: 200px;
+            height: 200px;
+            background: pink;
+            /*margin: 100px auto 0;*/
+        }
+    </style>
+</head>
+<body>
+<div id="box"></div>
+</body>
+<script type="text/javascript">
+    var box = document.getElementById('box');
+
+    box.onmousewheel = fun;
+    if(box.addEventListener){
+        box.addEventListener('DOMMouseScroll',fun);
+    };
+
+    var flag = '';
+    function fun(event){
+        event = event || window.event;
+
+        if(event.wheelDelta){
+            if(event.wheelDelta > 0){
+                //向上
+                flag = 'up';
+            }else{
+                flag = 'down';
+            }
+        }else if(event.detail){
+            if(event.detail < 0){
+                //向上
+                flag = 'up';
+            }else{
+                flag = 'down';
+            }
+        }
+
+
+        switch (flag) {
+            case 'up':
+                //滚轮向上，盒子top减小；
+                box.style.height = box.offsetHeight - 5 +'px';
+                break;
+            case 'down':
+                //滚轮向上，盒子top减小；
+                box.style.height = box.offsetHeight + 5 +'px';
+                break;
+        }
+
+        if(event.preventDefault){
+            event.preventDefault();
+        };
+
+        return false;
+    }
+
+
+
+</script>
+</html>
