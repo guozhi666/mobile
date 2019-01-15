@@ -1,0 +1,35 @@
+@zero:0;
+
+* {
+  margin:@zero;
+  padding:@zero;
+}
+
+.juzhong(@color, @w, @h){
+  position:absolute;
+  top: @zero;
+  left: @zero;
+  right: @zero;
+  bottom: @zero;
+  margin: auto;
+
+  background: @color;
+  width:@w;
+  height: @h;
+}
+
+#wrap{
+  .juzhong(@color:grey, @w:500px, @h:500px);
+
+  div{
+    &:nth-child(1){
+      .juzhong(@color:pink, @w:400px, @h:400px);
+    }
+    &:nth-child(2){
+      .juzhong(@color:greenyellow, @w:300px, @h:300px);
+    }
+    &:nth-child(3){
+      .juzhong(@color:deeppink, @w:200px, @h:200px);
+    }
+  }
+}

@@ -1,0 +1,21 @@
+* {
+  margin: 0;
+  padding: 0;
+}
+#wrap {
+  width: 500px;
+  height: 500px;
+  background: grey;
+  position: relative;
+}
+#wrap .inner {
+  width: 150px;
+  height: 150px;
+  background: pink;
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  margin: auto;
+}

@@ -1,0 +1,48 @@
+* {
+  margin: 0;
+  padding: 0;
+}
+#wrap {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  margin: auto;
+  background: #808080;
+  width: 500px;
+  height: 500px;
+}
+#wrap div:nth-child(1) {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  margin: auto;
+  background: #ffc0cb;
+  width: 400px;
+  height: 400px;
+}
+#wrap div:nth-child(2) {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  margin: auto;
+  background: #adff2f;
+  width: 300px;
+  height: 300px;
+}
+#wrap div:nth-child(3) {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  margin: auto;
+  background: #ff1493;
+  width: 200px;
+  height: 200px;
+}
