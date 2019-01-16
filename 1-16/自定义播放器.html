@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="css/index.css">
+</head>
+<body>
+    <section id="wrap">
+            <video src="http://img.ksbbs.com/asset/Mon_1703/eb048d7839442d0.mp4" id="myVideo"></video>
+            <footer class="footerMain">
+                <div class="btns">
+                    <div class="start "></div>
+                    <div class="stop"></div>
+                </div>
+                <div class="progress">
+                    <div class="smallGrey">
+                        <div class="smallWhite"></div>
+                        <div class="smallPink"></div>
+                    </div>
+                </div>
+                <div class="others">
+                    <div class="timing">
+                        <span class="now">00:00:00</span>/
+                        <span class="all">00:00:00</span>
+                    </div>
+                    <div class="listen">
+                        <div class="shengY">
+                            <span class=""></span>
+                        </div>
+                        <div class="progresS">
+                            <div class="smalGrey">
+                                <div class="smalWhite"></div>
+                                <div class="smalPink"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="big">
+                        <span class=""></span>
+                    </div>
+                </div>
+            </footer>
+    </section>
+
+</body>
+<script type="text/javascript">
+    var myVideo = document.getElementById('myVideo');
+    var start = document.querySelector('#wrap .btns .start');
+    var stop = document.querySelector('#wrap .btns .stop');
+
+    // var smallGrey = document.querySelector('#wrap .progress .smallGrey');
+    var smallWhite = document.querySelector('#wrap .progress .smallWhite');
+    var smallPink = document.querySelector('#wrap .progress .smallPink');
+    var shengY = document.querySelector('#wrap .others .shengY span');
+
+    var now = document.querySelector('#wrap .others .now');
+    var all = document.querySelector('#wrap .others .all');
+
+    var shengGrey = document.querySelector('#wrap .others .smalGrey');
+    var shengWhite = document.querySelector('#wrap .others .smalWhite');
+    var shengPink = document.querySelector('#wrap .others .smalPink');
+    var big = document.querySelector('#wrap .big span');
+
+    var starts = true;
+    var shengYs = true;
+    var bigS = true;
+
+    var bigB = 0;
+    start.onclick = function(){
+
+        if(starts){
+            start.className = 'start active';
+            myVideo.play();
+        }else{
+            start.className = 'start';
+            myVideo.pause();
+        }
+
+        starts = !starts;
+        // if(smallWhite){
+        //     console.log('trye');
+        // }
+
+        myVideo.ontimeupdate = function(){
+            bigB = myVideo.currentTime/myVideo.duration;
+            // console.log(bigB);
+
+            smallWhite.style.left = bigB * (document.documentElement.clientWidth - 285) + 'px';
+            // console.log(smallWhite.style.left);
+            smallPink.style.width = bigB * (document.documentElement.clientWidth - 285) + 'px';
+        }
+
+        //时间：
+        var alls = Math.floor(myVideo.duration/3600) + ':' + Math.floor(myVideo.duration%3600/60)+ ':' +Math.floor(myVideo.duration%3600%60);
+        all.innerText = alls;
+
+        var nows = Math.floor(myVideo.currentTime/3600) + ':' + Math.floor(myVideo.currentTime%3600/60)+ ':' +Math.floor(myVideo.currentTime%3600%60);
+        now.innerText = nows;
+    }
+
+
+    shengY.onclick = function(){
+        if(shengYs){
+            shengY.className = 'active';
+            myVideo.volume = 0;
+        }else{
+            shengY.className = '';
+            myVideo.volume = 1;
+        }
+        shengYs = !shengYs;
+    }
+
+
+    big.onclick = function(){
+        if(bigS){
+            big.className = 'active';
+        }else{
+            big.className = '';
+        }
+        bigS = !bigS;
+    }
+
+    stop.onclick = function(){
+        myVideo.load();
+    }
+
+//    音量：
+
+</script>
+</html>

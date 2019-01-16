@@ -1,0 +1,215 @@
+@zero:0;
+
+* {
+  margin: @zero;
+  padding: @zero;
+}
+html, body{
+  height: 100%;
+  overflow: hidden;
+}
+#wrap{
+  background:#383838;
+  //background: pink;
+  width: 100%;
+  height: 100%;
+  #myVideo{
+    //width: 100%;
+    display: block;
+    margin: @zero auto;
+    vertical-align: middle;
+    //background: yellowgreen;
+  }
+  .footerMain{
+    height: 25px;
+    background:#2A2A2A ;
+    position: relative;
+  /*================按钮排====================*/
+    .btns{
+      padding: 0 2px;
+      width: 55px;
+      height: 25px;
+      float: left;
+      display: flex;
+      justify-content: space-around;
+      align-items: center;
+      box-sizing: border-box;
+
+      .start{
+        width: 9px;
+        height: 11px;
+        background-image: url("../img/icon.png");
+        background-repeat: no-repeat;
+        background-position: @zero -23px;
+      }
+      .start.active{
+        width: 9px;
+        height: 11px;
+        background-image: url("../img/icon.png");
+        background-repeat: no-repeat;
+        background-position: @zero -11px;
+      }
+      .stop{
+        width: 9px;
+        height: 11px;
+        background-image: url("../img/icon.png");
+        background-repeat: no-repeat;
+        background-position: @zero @zero;
+      }
+    }
+
+    /*================进度条====================*/
+    .progress{
+      height: 25px;
+      position: absolute;
+      top: @zero;
+      bottom: @zero;
+      left: 55px;
+      right: 230px;
+      margin: auto;
+
+    //  小灰
+      .smallGrey{
+        width: 100%;
+        height: 3px;
+        background: #737373;
+        position: absolute;
+        top: @zero;
+        bottom: @zero;
+        margin-top: auto;
+        margin-bottom: auto;
+
+        //  小粉
+        .smallPink{
+          width: 0;
+          height: 3px;
+          position: absolute;
+          top: @zero;
+          bottom: @zero;
+          margin-top: auto;
+          margin-bottom: auto;
+          background: deeppink;
+        }
+        //  小白
+        .smallWhite{
+          width: 9px;
+          height: 7px;
+          position: absolute;
+          top: -2px;
+          left: 50px;
+          background: white;
+          border-radius: 2px;
+        }
+      }
+    }
+
+
+    /*================时间、音量、全屏====================*/
+    .others{
+      float: right;
+      width: 230px;
+      height: 25px;
+      display: flex;
+
+    //  时间
+      .timing{
+        width: 120px;
+        height: 25px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        font-size: 12px;
+        color: #fff;
+        span{
+          display: block;
+          //font-size: 12px;
+          //color: #fff;
+        }
+      }
+    //  声音
+      .listen{
+        width: 80px;
+        height: 25px;
+        //background: yellow;
+        display: flex;
+        .shengY{
+          width: 20px;
+          height: 25px;
+          span{
+            display: block;
+            width:11px ;
+            height:11px ;
+            margin: 7px auto;
+            background-image: url("../img/icon.png");
+            background-repeat: no-repeat;
+            background-position: @zero -34px;
+          }
+          span.active{
+            display: block;
+            width:11px ;
+            height:11px ;
+            margin: 7px auto;
+            background-image: url("../img/icon.png");
+            background-repeat: no-repeat;
+            background-position: @zero -46px;
+          }
+        }
+        .progresS{
+          width: 60px;
+          height: 25px;
+          .smalGrey{
+            width: 60px;
+            height: 3px;
+            background: #737373;
+            position: absolute;
+            top: @zero;
+            bottom: @zero;
+            margin-top: auto;
+            margin-bottom: auto;
+            .smalPink{
+              height: 3px;
+              width: 0;
+              background: deeppink;
+            }
+            .smalWhite{
+              width: 9px;
+              height: 7px;
+              position: absolute;
+              top: -2px;
+              left: @zero;
+              background: white;
+              border-radius: 2px;
+            }
+          }
+
+
+        }
+
+      }
+    //  全屏
+      .big{
+        width: 30px;
+        height: 25px;
+        display:flex;
+        justify-content: center;
+        align-items: center;
+        span{
+          display: block;
+          width: 11px;
+          height: 11px;
+          background-image: url("../img/icon.png");
+          background-repeat: no-repeat;
+          background-position: 0 -58px;
+        }
+        span.active{
+          display: block;
+          width: 11px;
+          height: 11px;
+          background-image: url("../img/icon.png");
+          background-repeat: no-repeat;
+          background-position: 0 -70px;
+        }
+      }
+    }
+  }
+}

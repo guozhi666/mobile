@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style type="text/css">
+        * {
+            margin: 0;
+            padding: 0;
+        }
+        a{
+            text-decoration: none;
+        }
+        img{
+            display: block;
+        }
+        #wrap{
+            height: 40px;
+            background: #88C5E1;
+            border-bottom:5px solid #54ABD4;
+            display: flex;
+            padding: 8px 0px 15px;
+        }
+        .logo{
+            width: 25%;
+            height: 40px;
+            background: #88C5E1;
+        }
+        .logo a{
+            display: block;
+            width: 100%;
+            height: 40px;
+        }
+        .logo img{
+            margin: 0 auto;
+            height: 40px;
+            display: none;
+        }
+        @media screen and (min-width: 1024px) {
+            #wrap .logo img:nth-child(1){
+                display: block;
+            }
+        }
+        @media screen and (min-width: 768px) and (max-width: 1024px) {
+            #wrap .logo{
+                width: 15%;
+            }
+            #wrap .logo img:nth-child(1){
+                display: none;
+            }
+            #wrap .logo img:nth-child(2){
+                display: block;
+            }
+        }
+        @media screen and (max-width: 768px) {
+            #wrap .logo img:nth-child(2){
+                display: none;
+            }
+            #wrap .logo img:nth-child(3){
+                display: block;
+            }
+        }
+
+        /*-------------搜索------------------*/
+        #inputS{
+            width: 50%;
+            height: 40px;
+            font-size: 0;
+            display: flex;
+
+        }
+        #inputS input[type="text"]{
+            width: 80%;
+            border-radius: 8px 0 0 8px;
+            border: 1px solid #B6B4B6;
+        }
+        #inputS input[type="submit"]{
+            width: 20%;
+            border-radius: 0 8px 8px 0;
+            border: 1px solid #B6B4B6;
+        }
+        @media screen and (min-width: 768px) and (max-width: 1024px){
+            #wrap #inputS{
+                width: 60%;
+            }
+        }
+        @media screen and (max-width: 768px){
+            #wrap #inputS{
+                width: 70%;
+            }
+        }
+        /*=========导航=============*/
+        #wrap .right{
+            width: 25%;
+        }
+        #wrap .right .nav{
+            width: 100%;
+            height: 40px;
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+        }
+        .nav a{
+            color: #fff;
+        }
+        #wrap .right .btn{
+            display: none;
+        }
+        @media screen and (max-width: 768px){
+            #wrap .right .nav{
+                display: none;
+            }
+            #wrap .right{
+                width: 15%;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+            }
+            #wrap .right .btn{
+                display: block;
+                border-radius: 5px;
+                padding: 9px 10px;
+                border: 1px solid #ddd;
+                background: #88c5e1
+            }
+            #wrap .right .btn span{
+                display: block;
+                width: 22px;
+                height: 2px;
+                background: #888;
+                margin-bottom: 5px;
+            }
+            #wrap .right .btn span:last-child{
+                margin-bottom: 0;
+            }
+
+        }
+    </style>
+</head>
+<body>
+<header id="wrap">
+    <h1 class="logo">
+        <a href="javascript:;">
+            <img src="img/Brand.png" alt="">
+            <img src="img/Brand-M.png" alt="">
+            <img src="img/Brand-S.png" alt="">
+        </a>
+    </h1>
+    <form action="javascript:;" id="inputS">
+        <input type="text" placeholder="请输入内容">
+        <input type="submit" value="搜索">
+    </form>
+    <section class="right">
+        <section class="nav">
+            <a href="javascript:;">首页</a>
+            <a href="javascript:;">课程</a>
+            <a href="javascript:;">公告</a>
+            <a href="javascript:;">登陆</a>
+        </section>
+        <button class="btn">
+            <span></span>
+            <span></span>
+            <span></span>
+        </button>
+    </section>
+</header>
+</body>
+<script type="text/javascript">
+    // window.onresize = function(){
+    //     console.log(document.documentElement.clientWidth)
+    // }
+</script>
+</html>
