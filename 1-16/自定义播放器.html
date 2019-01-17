@@ -7,7 +7,7 @@
 </head>
 <body>
     <section id="wrap">
-            <video src="http://img.ksbbs.com/asset/Mon_1703/eb048d7839442d0.mp4" id="myVideo"></video>
+            <video src="http://img.ksbbs.com/asset/Mon_1703/eb048d7839442d0.mp4" id="myVideo" loop></video>
             <footer class="footerMain">
                 <div class="btns">
                     <div class="start "></div>
@@ -43,12 +43,14 @@
     </section>
 
 </body>
+<script type="text/javascript" src="js/drag.js"></script>
 <script type="text/javascript">
     var myVideo = document.getElementById('myVideo');
+    var btns = document.querySelector('#wrap .footerMain .btns');
     var start = document.querySelector('#wrap .btns .start');
     var stop = document.querySelector('#wrap .btns .stop');
 
-    // var smallGrey = document.querySelector('#wrap .progress .smallGrey');
+    var smallGrey = document.querySelector('#wrap .progress .smallGrey');
     var smallWhite = document.querySelector('#wrap .progress .smallWhite');
     var smallPink = document.querySelector('#wrap .progress .smallPink');
     var shengY = document.querySelector('#wrap .others .shengY span');
@@ -56,31 +58,38 @@
     var now = document.querySelector('#wrap .others .now');
     var all = document.querySelector('#wrap .others .all');
 
-    var shengGrey = document.querySelector('#wrap .others .smalGrey');
-    var shengWhite = document.querySelector('#wrap .others .smalWhite');
-    var shengPink = document.querySelector('#wrap .others .smalPink');
+    var smalGrey = document.querySelector('#wrap .others .smalGrey');
+    var smalWhite = document.querySelector('#wrap .others .smalWhite');
+    var smalPink = document.querySelector('#wrap .others .smalPink');
     var big = document.querySelector('#wrap .big span');
 
-    var starts = true;
-    var shengYs = true;
-    var bigS = true;
 
+    var volume = 1;
     var bigB = 0;
-    start.onclick = function(){
 
-        if(starts){
-            start.className = 'start active';
+    myVideo.onloadedmetadata = function(){
+        var alls =  time(myVideo.duration);
+        all.innerText = alls;
+    }
+
+    //停止键
+    stop.onclick = function(){
+        myVideo.currentTime = 0;
+        start.className = 'start';
+        myVideo.pause();
+    };
+
+    start.onclick = function(){
+        if(myVideo.paused){
             myVideo.play();
+            addClass(start, 'active');
         }else{
-            start.className = 'start';
             myVideo.pause();
+            removeClass(start, 'active');
         }
 
-        starts = !starts;
-        // if(smallWhite){
-        //     console.log('trye');
-        // }
 
+        //时刻获取进度条进度以及时间
         myVideo.ontimeupdate = function(){
             bigB = myVideo.currentTime/myVideo.duration;
             // console.log(bigB);
@@ -88,43 +97,173 @@
             smallWhite.style.left = bigB * (document.documentElement.clientWidth - 285) + 'px';
             // console.log(smallWhite.style.left);
             smallPink.style.width = bigB * (document.documentElement.clientWidth - 285) + 'px';
+
+            var nows = time(myVideo.currentTime)
+            now.innerText = nows;
         }
 
-        //时间：
-        var alls = Math.floor(myVideo.duration/3600) + ':' + Math.floor(myVideo.duration%3600/60)+ ':' +Math.floor(myVideo.duration%3600%60);
-        all.innerText = alls;
+    }
 
-        var nows = Math.floor(myVideo.currentTime/3600) + ':' + Math.floor(myVideo.currentTime%3600/60)+ ':' +Math.floor(myVideo.currentTime%3600%60);
+    //主进度条拖拽
+    var callBack = {
+        move : function(){
+            smallPink.style.width = smallWhite.offsetLeft + 'px';
+
+            //拖拽进度条，绑定播放时间
+            var scale = smallWhite.offsetLeft/smallGrey.offsetWidth;
+            myVideo.currentTime = scale * myVideo.duration;
+            now.innerHTML = time(myVideo.currentTime);
+            myVideo.play();
+            addClass(start, 'active');
+
+        }
+    }
+    drag(smallWhite, callBack);
+    //鼠标点击主进度条
+    smallGrey.onclick = function(event){
+        var strX = event.clientX;
+        var disX = strX - btns.offsetWidth;
+        smallWhite.style.left = smallPink.style.width = disX + 'px';
+
+        var scale = smallWhite.offsetLeft/ smallGrey.offsetWidth;
+        myVideo.currentTime = scale * myVideo.duration;
+        var nows = time(myVideo.currentTime);
         now.innerText = nows;
     }
 
 
+    //音量
+    //进度条
+
+    smalWhite.style.left = smalPink.style.width = smalGrey.offsetWidth - smalWhite.offsetWidth + 'px';
+    //点击音量进度条
+    // smalGrey.onclick = function(event){
+    //     var strX = event.clientX;
+    //     var endX = strX - btns.offsetWidth -
+    // }
+    //
+
+    //拖拽音量进度条
+    var callBackS = {
+        move : function(){
+            smalPink.style.width = smalWhite.offsetLeft + 'px';
+
+            //拖拽进度条，绑定播放时间
+            var scale = smalWhite.offsetLeft/smalGrey.offsetWidth;
+            myVideo.volume = scale ;
+            // now.innerHTML = time(myVideo.currentTime);
+            // myVideo.play();
+            // addClass(start, 'active');
+            if(scale == 0){
+                addClass(shengY,'active');
+            }else{
+                removeClass(shengY, 'active');
+            }
+            volume = scale;
+        }
+    };
+    drag(smalWhite, callBackS);
+
     shengY.onclick = function(){
-        if(shengYs){
-            shengY.className = 'active';
+        if(shengY.muted){
+            shengY.muted = false;
+            myVideo.volume = volume;
+            removeClass(shengY, 'active');
+            smalWhite.style.left = smalPink.style.width = volume * (smalGrey.offsetWidth - smalWhite.offsetWidth) + 'px';
+        }else{
+            shengY.muted = true;
             myVideo.volume = 0;
-        }else{
-            shengY.className = '';
-            myVideo.volume = 1;
+            addClass(shengY, 'active');
+            smalPink.style.width = smalWhite.style.left = '0px';
         }
-        shengYs = !shengYs;
-    }
+    };
 
+    //放大缩小
+    var isFullScreen = false;//默认不是全屏
+    big.onclick = function () {
 
-    big.onclick = function(){
-        if(bigS){
-            big.className = 'active';
-        }else{
-            big.className = '';
+        if(isFullScreen) {
+            //不是全屏
+            //删除
+            removeClass(big,'active');
+            isFullScreen = false;
+            if (document.exitFullscreen) {
+                document.exitFullscreen();
+            }
+            else if (document.mozCancelFullScreen) {
+                document.mozCancelFullScreen();
+            }
+            else if (document.webkitCancelFullScreen) {
+                document.webkitCancelFullScreen();
+            }
+            else if (document.msExitFullscreen) {
+                document.msExitFullscreen();
+            }
+        } else {
+            isFullScreen = true;
+            //加active
+            addClass(big,'active');
+            //全屏模式
+            var docElm = document.documentElement;
+            //W3C
+            if (docElm.requestFullscreen) {
+                docElm.requestFullscreen();
+            }
+            //FireFox
+            else if (docElm.mozRequestFullScreen) {
+                docElm.mozRequestFullScreen();
+            }
+            //Chrome等
+            else if (docElm.webkitRequestFullScreen) {
+                docElm.webkitRequestFullScreen();
+            }
+            //IE11
+            else if (docElm.msRequestFullscreen) {
+                docElm.msRequestFullscreen();
+            }
         }
-        bigS = !bigS;
+
+    };
+
+    // 操作class
+    // class操作函数
+    function addClass(node,className){
+        var reg=new RegExp("\\b"+className+"\\b");
+        if(!reg.test(node.className)){
+            node.className +=(" "+className);
+        }
     }
 
-    stop.onclick = function(){
-        myVideo.load();
+    function removeClass(node,className){
+        if(node.className){
+            var reg=new RegExp("\\b"+className+"\\b");
+            var classes = node.className;
+            node.className=classes.replace(reg,"");
+            if(/^\s*$/g.test(node.className)){
+                node.removeAttribute("class");
+            }
+        }else{
+               node.removeAttribute("class");
+           }
     }
 
-//    音量：
 
+    // 时间
+    function time(Time){
+        Time = parseInt(Time);
+        var t = changeTime(Math.floor(Time/3600));
+        var m = changeTime(Math.floor(Time%3600/60));
+        var s = changeTime(Math.floor(Time%60));
+
+        return t + ':'+ m +':'+ s ;
+    }
+    function changeTime(num){
+        if(num<10){
+            num = '0'+ num;
+        }else{
+            num = '' + num ;
+        }
+        return num;
+    }
 </script>
 </html>
