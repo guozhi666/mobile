@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style type="text/css">
+        * {
+            margin: 0;
+            padding: 0;
+        }
+        #myCanvas{
+            position: absolute;
+            top:0px;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            margin: auto;
+
+            background: pink;
+
+        }
+    </style>
+</head>
+<body>
+<canvas id="myCanvas" width="400" height="400"></canvas>
+</body>
+<script type="text/javascript" src=""></script>
+<script type="text/javascript">
+    var myCanvas = document.getElementById('myCanvas');
+
+    var pain = myCanvas.getContext('2d');
+
+    setInterval(function(){
+        pain.clearRect(0,0,myCanvas.width,myCanvas.height);
+        move();
+    }, 1000);
+
+    function move(){
+        pain.save();
+            //初始化
+            pain.translate(200, 200);
+
+            pain.rotate(-90*Math.PI/180);
+            // pain.fillRect(0,0,100, 50);
+            pain.scale(0.5,0.5);
+            pain.lineWidth = '8';
+            pain.strokeStyle = "black";
+            pain.lineCap = "round";
+
+
+            //外层空心圆盘
+            pain.save();
+                pain.beginPath();
+                pain.strokeStyle = '#325FA2'
+                pain.lineWidth= '14';
+                pain.arc(0,0,140, 0, 2*Math.PI, false);
+                pain.stroke();
+            pain.restore();
+
+            //时钟刻度 长度为20
+            // 宽度为8
+            // 外层空心圆盘与时针刻度之间的距离也为20
+            pain.save();
+
+                pain.lineWidth = '8'
+                for(var i = 0; i<12; i++){
+                    pain.beginPath();
+                    pain.rotate(30*Math.PI/180);
+                    pain.moveTo(100, 0);
+                    pain.lineTo(120, 0);
+                    pain.stroke();
+                }
+            pain.restore();
+
+            //分钟刻度
+            pain.save();
+                pain.beginPath();
+                pain.lineWidth = '4';
+                // pain.strokeStyle = 'green'
+                for(var j = 0; j<60; j++){
+                    if(j%5 !== 0){
+                        pain.moveTo(113, 0);
+                        pain.lineTo(116, 0);
+                        pain.stroke();
+                    }
+                    pain.rotate(6*Math.PI/180);
+                }
+            pain.restore();
+
+            var date = new Date();
+            var second = date.getSeconds();
+            var min = date.getMinutes() + second/60;
+            var hour = date.getHours() + min/60;
+
+            // var date = new Date();
+            // var second = date.getSeconds();
+            // var min = date.getMinutes();
+            // min = min + second/60;
+            // var hour = date.getHours();
+            // hour = hour + min/60;
+
+            console.log(hour);
+            console.log(min);
+            console.log(second);
+
+            //时针
+            // console.log(hour);
+            pain.save();
+                pain.beginPath();
+                pain.lineWidth = '14';
+                pain.rotate(hour*30*Math.PI/180);
+                pain.moveTo(-20, 0);
+                pain.lineTo(80, 0);
+                pain.stroke();
+            pain.restore();
+
+            //分针
+            pain.save();
+                pain.beginPath();
+                pain.lineWidth = '10';
+                pain.rotate(min*6*Math.PI/180);
+                pain.moveTo(-28, 0);
+                pain.lineTo(112, 0);
+                pain.stroke();
+            pain.restore();
+
+            //秒针
+            pain.save();
+                pain.beginPath()
+
+                pain.lineWidth = '6'
+                pain.rotate(second*6*Math.PI/180);
+                pain.moveTo(-30, 0);
+                pain.lineTo(86, 0)
+                pain.stroke();
+
+                pain.beginPath();
+                pain.fillStyle = '#D40000';
+                pain.arc(0, 0, 10, 0 ,2*Math.PI);
+                pain.fill();
+                pain.restore();
+
+                pain.beginPath();
+                pain.strokeStyle = '#D40000';
+                pain.lineWidth = '6';
+                pain.rotate(second*6*Math.PI/180);
+                pain.arc(96, 0, 10, 0, 2*Math.PI);
+                pain.stroke();
+             pain.restore();
+        // pain.restore();
+    }
+</script>
+</html>

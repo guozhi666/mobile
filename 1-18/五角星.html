@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>画布</title>
+    <style type="text/css">
+        * {
+            margin: 0;
+            padding: 0;
+        }
+        /*body{*/
+        /*text-align: center;*/
+        /*}*/
+        #myCanvas{
+            position: absolute;
+            top:0px;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            margin: auto;
+
+            background: red;
+
+        }
+        /*canvas默认宽高 300*150*/
+        /* inline-block元素*/
+
+    </style>
+</head>
+<body>
+
+<canvas id="myCanvas" width="400" height="400">
+    您的浏览器不支持canvas，请升级一下浏览器，更换浏览器
+</canvas>
+
+</body>
+<script type="text/javascript">
+    var myCanvas = document.getElementById('myCanvas');
+
+    var pain = myCanvas.getContext('2d');
+    var R = 100;
+    var r = 40
+    pain.strokeStyle = 'yellow';
+    pain.fillStyle = 'yellow'
+    pain.lineWidth = '5';
+
+    pain.translate(200, 200);
+    pain.beginPath();
+    pain.moveTo(R*Math.cos(18*Math.PI/180), -R*Math.sin(18*Math.PI/180));
+    // pain.moveTo(0,0);
+    for(var i = 0; i< 5; i++){
+        pain.lineTo(R*Math.cos((18+72*i)*Math.PI/180), -R*Math.sin((18+72*i)*Math.PI/180));
+        pain.lineTo(r*Math.cos((54+72*i)*Math.PI/180), -r*Math.sin((54+72*i)*Math.PI/180));
+    }
+    pain.closePath();
+    pain.stroke();
+    pain.fill();
+
+
+</script>
+</html>

@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style type="text/css">
+        * {
+            margin: 0;
+            padding: 0;
+        }
+        body{
+            text-align: center;
+        }
+        #myCanvas{
+            background: pink;
+
+        }
+    </style>
+</head>
+<body>
+<canvas id="myCanvas" width="400" height="400">
+    您的浏览器不支持canvas，请升级一下浏览器，更换浏览器
+</canvas>
+</body>
+<script type="text/javascript">
+    var myCanvas = document.getElementById('myCanvas');
+
+    var pain = myCanvas.getContext('2d');
+    pain.strokeStyle = 'blue';
+
+    // pain.lineCap = 'round';
+    pain.lineJoin = 'round';
+    pain.lineWidth = '10';
+    pain.moveTo(100, 100);
+    pain.lineTo(100, 200);
+    pain.lineTo(150, 200);
+    pain.closePath();
+    pain.stroke();
+</script>
+</html>

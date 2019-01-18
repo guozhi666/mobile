@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>画布</title>
+    <style type="text/css">
+        * {
+            margin: 0;
+            padding: 0;
+        }
+        /*body{*/
+        /*text-align: center;*/
+        /*}*/
+        #myCanvas{
+            position: absolute;
+            top:0px;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            margin: auto;
+
+            background: pink;
+
+        }
+        /*canvas默认宽高 300*150*/
+        /* inline-block元素*/
+
+    </style>
+</head>
+<body>
+
+<canvas id="myCanvas" width="400" height="400">
+    您的浏览器不支持canvas，请升级一下浏览器，更换浏览器
+</canvas>
+
+</body>
+<script type="text/javascript">
+    var myCanvas = document.getElementById('myCanvas');
+    var pain = myCanvas.getContext('2d');
+
+    pain.beginPath();
+    pain.fillStyle = 'yellowgreen';
+
+    var deg = 0;
+    var scale = 1;
+    var value = 0
+    setInterval(function(){
+        deg+=3;
+        value += scale;
+        pain.clearRect(0, 0, myCanvas.width, myCanvas.height);
+        pain.save();
+            pain.translate(200, 200);
+
+            if(value>200){
+                scale = -1;
+            }else if(value <0){
+                scale = 1;
+            }
+            pain.scale(value/100, value/100);
+            pain.rotate(Math.PI/180*deg)
+            pain.fillRect(-50, -50, 100, 100);
+        pain.restore();
+
+    }, 30);
+</script>
+</html>
