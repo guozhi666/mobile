@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>画布</title>
+    <style type="text/css">
+        * {
+            margin: 0;
+            padding: 0;
+        }
+        body{
+            text-align: center;
+        }
+        #myCanvas{
+            background: pink;
+
+        }
+    </style>
+</head>
+<body>
+
+<canvas id="myCanvas" width="400" height="400">
+    您的浏览器不支持canvas，请升级一下浏览器，更换浏览器
+</canvas>
+
+</body>
+<script type="text/javascript">
+    var myCanvas = document.getElementById('myCanvas');
+    var pain = myCanvas.getContext('2d');
+
+    pain.beginPath();
+    // var linearG = pain.createLinearGradient(50, 50, 50, 100);
+    var linearG = pain.createLinearGradient(0, 100, 100, 100);
+
+    linearG.addColorStop(0, 'green');
+    linearG.addColorStop(0.5, 'yellow')
+    linearG.addColorStop(1, 'green');
+
+    pain.fillStyle = linearG;
+    pain.fillRect(0,0,200,200)
+    pain.strokeRect(50, 50, 50, 50)
+
+</script>
+</html>

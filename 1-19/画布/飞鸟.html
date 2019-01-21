@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>画布</title>
+    <style type="text/css">
+        * {
+            margin: 0;
+            padding: 0;
+        }
+        body{
+            text-align: center;
+        }
+        #myCanvas{
+            border: 1px solid #000000;
+
+        }
+    </style>
+</head>
+<body>
+
+<canvas id="myCanvas" width="800" height="400">
+    您的浏览器不支持canvas，请升级一下浏览器，更换浏览器
+</canvas>
+
+</body>
+<script type="text/javascript">
+    var myCanvas = document.getElementById('myCanvas');
+    var img = new Image();
+    // img.src = 'img/q_r1.png';
+    var pain = myCanvas.getContext('2d')
+
+    var num = 0;
+    var speat = 0;
+    setInterval(function(){
+        pain.clearRect(0,0,myCanvas.width, myCanvas.height);
+        num++;
+        if(num>8){
+            num = 1;
+        }
+        speat+=10;
+        if(speat>800){
+            speat = -140;
+        }
+        img.src = 'img/q_r'+num+'.jpg';
+        img.onload = function(){
+
+            pain.drawImage(img, speat, 200, 140, 85);
+        }
+
+
+
+    },100);
+</script>
+</html>
