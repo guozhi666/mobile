@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+    <style type="text/css">
+        *{
+            margin: 0;
+            padding: 0;
+            list-style: none;
+        }
+        .box{
+            width: 1200px;
+            height: 300px;
+            border: 1px solid #000;
+            margin: 10px auto 0;
+            overflow: hidden;
+
+            /*background: red;*/
+        }
+        img{
+            display: block;
+        }
+        .box ul {
+            width: 1300px;
+            overflow: hidden;
+        }
+        .box ul li{
+            float:left;
+            width: 200px;
+        }
+        .box ul li img{
+            width: 500px;
+            height: 300px;
+        }
+
+    </style>
+</head>
+<body>
+<div class="box">
+    <ul>
+        <li>
+            <img src="img/01.jpg"/>
+        </li>
+
+        <li>
+            <img src="img/03.jpg"/>
+        </li>
+        <li>
+            <img src="img/04.jpg"/>
+        </li>
+        <li>
+            <img src="img/02.jpg"/>
+        </li>
+        <li>
+            <img src="img/05.jpg"/>
+        </li>
+        <li>
+            <img src="img/06.jpg"/>
+        </li>
+    </ul>
+</div>
+<script src="../js/jquery.1.10.2.js" type="text/javascript" charset="utf-8"></script>
+<script type="text/javascript">
+    /*
+     * 由于快速滑动的时候,每个li都在不停的计算宽度,此时会有误差出现,有可能所有的li的宽度会
+     * 大于1200px,造成最后一个li掉下来,我们可以人为的加大ul的宽度
+     * 有可能所有li的宽度会小于1200px,会有白边出现,此时可以给其它的li多设置几像素的宽度,
+     * 避免相加的宽度不够1200px
+     */
+
+    $(function () {
+        $li = $('li');
+        // $li.hover
+        //     (function () {
+        //         $(this).stop().animate({width: '500px'}).siblings().stop().animate({width:'145px'});
+        //     }),
+        //         function () {
+        //         // $li.stop().animate({width:'200px'});
+        //         $(this).stop().animate({width: '200px'}).siblings().stop().animate({width:'200px'});
+        //     }
+
+        $li.on('mouseenter', function () {
+            $(this).stop().animate({width: '500px'}).siblings().stop().animate({width:'145px'});
+        }).on('mouseleave', function () {
+            $li.stop().animate({width:'200px'});
+        })
+    })
+
+</script>
+</body>
+</html>
