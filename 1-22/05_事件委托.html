@@ -1,0 +1,77 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>20_事件委托_引入.html</title>
+</head>
+
+<body>
+
+<ul id="list">
+    <li>11111</li>
+    <li>1111111</li>
+    <li>111111111</li>
+    <li>11111111111</li>
+</ul>
+
+<li>22222</li>
+<br>
+<button id="btn1">添加新的li</button>
+<button id="btn2">删除ul上的事件委托的监听器</button>
+<br>
+
+<!--
+绑定事件监听的问题: 新加的元素没有监听
+-->
+<script src="js/jquery-1.10.1.js"></script>
+<script type="text/javascript">
+   $(function () {
+       /*
+   需求：
+   1. 点击 li 背景就会变为红色
+   2. 点击 btn 就添加一个 li
+  */
+
+       //原生JS
+       var list = document.querySelector('ul');
+       list.onclick = function(event){
+           // console.log(event.target);
+           // console.log(this);
+           event.target.style.background = 'red';
+       }
+
+       var btn1 = document.getElementById('btn1');
+        btn1.onclick= function () {
+            var li = document.createElement('li');
+            li.innerText = '666';
+            list.appendChild(li);
+        }
+        
+        var btn2 = document.getElementById('btn2');
+        btn2.onclick = function () {
+
+        }
+
+
+       //  var $ul = $('ul');
+       //  //事件委派  点击 li 背景就会变为红色
+       //  $ul.delegate('li', 'click', function () {
+       //   // this.style.background = 'red';   //DOM对象
+       //      $(this).css('background', 'red');   //jQuery对象
+       //  })
+       //
+       // //点击 btn 就添加一个 li
+       // var $btn1 = $('#btn1');
+       //  $btn1.click(function () {
+       //      $ul.append('<li>6666</li>')
+       //  })
+       //
+       // //解除事件委派
+       // var $btn2 = $('#btn2');
+       //  $btn2.click(function () {
+       //      $ul.undelegate();
+       //  })
+   })
+</script>
+</body>
+</html>
