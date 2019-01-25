@@ -20,8 +20,8 @@ $(function () {
     var $prev = $('#prev');
     var $next = $('#next');
     var imgWidth = 600;
-    var allTime = 600;
-    var everyTime = 1;
+    var allTime = 400;
+    var everyTime = 20;
     var time1= null
 
     //1. 点击向右(左)的图标, 平滑切换到下(上)一页
@@ -54,17 +54,17 @@ $(function () {
                 //无限轮播
                 //startOffset == -3600 , startOffset = -600
                 //startOffset == 0 , startOffset = -3000;
-                if(startOffset == -3600){
-                    startOffset = -600;
-                }else if(startOffset == 0){
-                    startOffset = -3000;
-                };
-
-                // if(startOffset == -($span.length+1)*imgWidth){
-                //     startOffset = -imgWidth;
+                // if(startOffset == -3600){
+                //     startOffset = -600;
                 // }else if(startOffset == 0){
-                //     startOffset = -$span.length*imgWidth;
+                //     startOffset = -3000;
                 // };
+
+                if(startOffset == -($span.length+1)*imgWidth){
+                    startOffset = -imgWidth;
+                }else if(startOffset == 0){
+                    startOffset = -$span.length*imgWidth;
+                };
             }
         //
             $list.css('left',startOffset);
