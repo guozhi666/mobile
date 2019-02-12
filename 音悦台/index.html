@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=no" />
+		<title></title>
+		<link rel="stylesheet" href="css/index.css" />
+	</head>
+	<body>
+		<!--模拟屏幕区域-->
+		<section id="wrap">
+			<!--头部-->
+			<header id="header">
+				<!--上半部-->
+				<div class="headerTop">
+					<!--logo-->
+					<h1 class="logo">
+						<a href="javascript:;">
+							<img src="img/logo.png" alt="" />
+						</a>
+					</h1>
+					<!--菜单按钮-->
+					<a href="javascript:;" class="menuBtn menuBtnClose"></a>
+					<!--按钮排-->
+					<div class="btns">
+						<a href="javascript:;">搜索</a>
+						<a href="javascript:;">登录</a>
+						<a href="javascript:;">注册</a>
+					</div>
+				</div>
+				<!--下半部-->
+				<div class="headerbottom">
+					<input type="text" placeholder="请输入搜搜内容"/>
+					<input type="submit" value="搜索"/>
+				</div>
+				<!--遮罩层-->
+				<ul class="mask">
+					<li>
+						<a href="javascript:;">首页</a>
+					</li>
+					<li>
+						<a href="javascript:;">MV</a>
+					</li>
+					<li>
+						<a href="javascript:;">悦单</a>
+					</li>
+					<li>
+						<a href="javascript:;">V榜</a>
+					</li>
+					<li>
+						<a href="javascript:;">音悦</a>
+					</li>
+					<li>
+						<a href="javascript:;">商城</a>
+					</li>
+					<li>
+						<a href="javascript:;">节目</a>
+					</li>
+					<li>
+						<a href="javascript:;">饭团</a>
+					</li>
+					<li>
+						<a href="javascript:;">资讯</a>
+					</li>
+					<li>
+						<a href="javascript:;">我的家</a>
+					</li>
+					<li>
+						<a href="javascript:;">APP下载</a>
+					</li>
+					<li>
+						<a href="javascript:;">热门应用</a>
+					</li>
+				</ul>
+			</header>
+			
+		</section>
+	</body>
+	<script type="text/javascript" src="js/changeClass.js"></script>
+	<script type="text/javascript">
+		//浏览器默认行为
+		document.addEventListener('touchstart', function(event){
+			event.preventDefault();
+		});
+		//适配
+		(function(){
+			var width = document.documentElement.clientWidth;
+			var styleNode = document.createElement('style');
+			styleNode.innerHTML = 'html{font-size:'+ width/16 +'px !important;}';
+			document.head.appendChild(styleNode);
+		})();
+		
+		//点透事件处理
+		(function(){
+			var aNodes = document.querySelectorAll('a');
+			for(var i = 0; i<aNodes.length; i++){
+				aNodes[i].addEventListener('touchstart', function(){
+					window.location.href = this.href;
+				});
+			};
+		})();
+		
+		//菜单栏点击事件
+		menuClick();
+		function menuClick(){
+			var menuBtn = document.querySelector('#wrap #header .headerTop .menuBtn');
+			var mask = document.querySelector('#wrap #header .mask');
+			var flag = true;
+			
+			menuBtn.addEventListener('touchstart', function(event){
+				if(flag){
+					removeClass(menuBtn, 'menuBtnCloce');
+					addClass(menuBtn, 'menuBtnOpen');
+					mask.style.display = 'block';
+				}else{
+					removeClass(menuBtn, 'menuBtnOpen');
+					addClass(menuBtn, 'menuBtnCloce');
+					mask.style.display = 'none';
+				};
+				flag = !flag;
+				event.stopPropagation();
+				event.preventDefault();
+			});
+			
+			document.addEventListener('touchstart', function(){
+				if(!flag){
+					removeClass(menuBtn, 'menuBtnOpen');
+					addClass(menuBtn, 'menuBtnCloce');
+					mask.style.display = 'none';
+					flag = true;
+				}
+			});
+			mask.addEventListener('touchstart', function(event){
+				event.stopPropagation();
+				event.preventDefault();
+			})
+		}
+		
+	</script>
+</html>

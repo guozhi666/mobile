@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale = 1, user-scalable = no"/>
+		<title></title>
+		<style type="text/css">
+			*{
+				margin: 0;
+				padding: 0;
+			}
+			#box{
+				width:8rem ;
+				height: 8rem;
+				background: pink;
+			}
+		</style>
+		
+	</head>
+	<body>
+		<div id="box"></div>
+		<script type="text/javascript">
+			
+			(function(){
+				var width = document.documentElement.clientWidth;
+				var styleWidth = document.createElement('style');
+				styleWidth.innerHTML = 'html{font-size:' + width/16 + 'px !important;}';
+				document.head.appendChild(styleWidth);
+			})();
+			
+		</script>
+	</body>
+</html>
