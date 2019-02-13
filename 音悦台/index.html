@@ -73,7 +73,81 @@
 					</li>
 				</ul>
 			</header>
+			<!--内容区-->
+			<section id="content">
+				<!--导航-->
+				<nav class="navWrap">
+					<ul class="navList">
+						<li class="active">
+							<a href="javascript:;">首页</a>
+						</li>
+						<li>
+							<a href="javascript:;">MV</a>
+						</li>
+						<li>
+							<a href="javascript:;">悦单</a>
+						</li>
+						<li>
+							<a href="javascript:;">V榜</a>
+						</li>
+						<li>
+							<a href="javascript:;">音悦</a>
+						</li>
+						<li>
+							<a href="javascript:;">商城</a>
+						</li>
+						<li>
+							<a href="javascript:;">节目</a>
+						</li>
+						<li>
+							<a href="javascript:;">饭团</a>
+						</li>
+						<li>
+							<a href="javascript:;">资讯</a>
+						</li>
+						<li>
+							<a href="javascript:;">我的家</a>
+						</li>
+						<li>
+							<a href="javascript:;">APP下载</a>
+						</li>
+						<li>
+							<a href="javascript:;">热门应用</a>
+						</li>
+					</ul>
+				</nav>
+				<!--轮播图-->
+				<div class="lunWrap">
+					<ul class="listLun">
+						<li>
+							<a href="javascript:;">
+								<img src="img/1.jpg"/>
+							</a>
+						</li>
+						<li>
+							<a href="javascript:;">
+								<img src="img/2.jpg"/>
+							</a>
+						</li>
+						<li>
+							<a href="javascript:;">
+								<img src="img/3.jpg"/>
+							</a>
+						</li>
+						<li>
+							<a href="javascript:;">
+								<img src="img/4.jpg"/>
+							</a>
+						</li>
+						<li>
+							<a href="javascript:;">
+								<img src="img/5.jpg"/>
+							</a>
+						</li>
 			
+					</ul>
+				</div>
+			</section>
 		</section>
 	</body>
 	<script type="text/javascript" src="js/changeClass.js"></script>
@@ -83,14 +157,38 @@
 			event.preventDefault();
 		});
 		//适配
+//		(function(){
+//			var width = document.documentElement.clientWidth;
+//			var styleNode = document.createElement('style');
+//			styleNode.innerHTML = 'html{font-size:'+ width/16 +'px !important;}';
+//			document.head.appendChild(styleNode);
+//		})();
+		
+		//点透事件处理
+//		(function(){
+//			var aNodes = document.querySelectorAll('a');
+//			for(var i = 0; i<aNodes.length; i++){
+//				aNodes[i].addEventListener('touchstart', function(){
+//					window.location.href = this.href;
+//				});
+//			};
+//		})();
+		
+		//清除浏览器默认行为：
+		document.addEventListener('touchstart', function(event){
+			event.stopPropagation();
+			event.preventDefault();
+			
+		});
+		//适配
 		(function(){
 			var width = document.documentElement.clientWidth;
 			var styleNode = document.createElement('style');
-			styleNode.innerHTML = 'html{font-size:'+ width/16 +'px !important;}';
+			styleNode.innerHTML = 'html{font-size:'+ width/16 +'px !important}';
 			document.head.appendChild(styleNode);
 		})();
 		
-		//点透事件处理
+		//点透
 		(function(){
 			var aNodes = document.querySelectorAll('a');
 			for(var i = 0; i<aNodes.length; i++){
@@ -134,6 +232,93 @@
 				event.stopPropagation();
 				event.preventDefault();
 			})
+		}
+		
+		//获取焦点和市区焦点
+		changeFocus();
+		function changeFocus(){
+			var inputNode = document.querySelector('#wrap #header .headerbottom input[type="text"]');
+			inputNode.addEventListener('touchstart', function(event){
+//				console.log('focus')
+				//获取焦点
+				inputNode.focus();
+				event.stopPropagation();
+				event.preventDefault();
+			});
+			document.addEventListener('touchstart',function(event){
+//				console.log('blur')
+				//失去焦点
+				inputNode.blur();
+			})
+		}
+		
+		//导航栏拖动
+		navDrag();
+		function navDrag(){
+			var navWrap = document.querySelector('#wrap #content .navWrap');
+			var navList = document.querySelector('#wrap #content .navWrap .navList');
+			
+			//获取初始位置
+			var eleX = 0;
+			//获取开始位置；
+			var startX = 0;
+			//获取结束位置;
+			var endX = 0
+			//手指按下
+			navWrap.addEventListener('touchstart', function(event){
+				eleX = navList.offsetLeft;
+				startX = event.changedTouches[0].clientX;
+			})
+			
+			//滑动导航栏
+			navWrap.addEventListener('touchmove',function(event){
+				endX = event.changedTouches[0].clientX;
+				//距离差
+				disX = endX - startX;
+				var navLeft = disX + eleX;
+				
+				//判定范围
+				if(navLeft > 0){
+					navLeft = 0;
+				}else if(navLeft < document.documentElement.clientWidth - navList.offsetWidth){
+					navLeft = document.documentElement.clientWidth - navList.offsetWidth
+				}
+					
+				navList.style.left = navLeft + 'px';
+			})
+			
+		}
+		
+		//轮播滑动
+		changeLunbo();
+		function changeLunbo(){
+			window.onload = function(){
+				var lunWrap = document.querySelector('#wrap #content .lunWrap');
+				var listLun = document.querySelector('#wrap #content .lunWrap .listLun');
+				var liNodeS = document.querySelectorAll('#wrap #content .lunWrap .listLun li');
+				
+				var styleLun = document.createElement('style');
+				styleLun.innerHTML = '#wrap #content .lunWrap .listLun{width:'+ liNodeS.length +'00%;}';
+				styleLun.innerHTML += '#wrap #content .lunWrap .listLun li{width:'+ 100/liNodeS.length +'%;}';
+				document.head.appendChild(styleLun);
+				
+				var eleX = 0;
+				var startX = 0;
+				var endX = 0;
+				var disX = 0;
+				
+				lunWrap.addEventListener('touchstart',function(event){
+					eleX = listLun.offsetLeft;
+					startX = event.changedTouches[0].clientX;
+				})
+				lunWrap.addEventListener('touchmove', function(event){
+					endX = event.changedTouches[0].clientX;
+					disX = endX - startX;
+					var lastS = disX + eleX;
+					listLun.style.left = lastS;
+				})
+			}
+			
 		}
 		
 	</script>

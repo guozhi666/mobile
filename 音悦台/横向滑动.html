@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no" />
+		<title></title>
+		<style type="text/css">
+			*{
+				margin: 0;
+				padding: 0;
+			}
+			html,body {
+				overflow: hidden;
+				height: 100%;
+			}
+			
+			a {
+				text-decoration: none;
+			}
+			
+			ul {
+				list-style: none;
+			}
+			
+			img {
+				display: block;
+			}
+			
+			input {
+				outline: none;
+			}
+			#wrap{
+				position: relative;
+			}
+			#wrap .list{
+				width: 1000%;
+				position: absolute;
+				top: 0;
+				left: 0;
+				overflow: hidden;
+			}
+			#wrap .list li{
+				width: 10%;
+				float: left;
+			}
+			#wrap .list li img{
+				width: 100%;
+			}
+			#wrap .icons{
+				width: 100%;
+				position: absolute;
+				bottom: 0px;
+				left: 0px;
+				text-align: center;
+			}
+			#wrap .icons span{
+				display: inline-block;
+				background: grey;
+				
+				width: 10px;
+				height: 10px;
+				border-radius: 50%;
+			}
+			#wrap .icons span.active{
+				background: deeppink;
+			}
+		</style>
+	</head>
+
+	<body>
+		<div id="wrap">
+			<ul class="list">
+				<li>
+					<a href="javascript:;">
+						<img src="img/1.jpg" />
+					</a>
+				</li>
+				<li>
+					<a href="javascript:;">
+						<img src="img/2.jpg" />
+					</a>
+				</li>
+				<li>
+					<a href="javascript:;">
+						<img src="img/3.jpg" />
+					</a>
+				</li>
+				<li>
+					<a href="javascript:;">
+						<img src="img/4.jpg" />
+					</a>
+				</li>
+				<li>
+					<a href="javascript:;">
+						<img src="img/5.jpg" />
+					</a>
+				</li>
+			</ul>
+			<!--小圆点-->
+			<div class="icons">
+				<span class="active"></span>
+				<span></span>
+				<span></span>
+				<span></span>
+				<span></span>
+			</div>
+		</div>
+	</body>
+	<script src="js/changeClass.js" type="text/javascript" charset="utf-8"></script>
+	<script src="js/transform.js" type="text/javascript" charset="utf-8"></script>
+	<script type="text/javascript">
+		document.addEventListener('touchstart',function(event){
+			event.preventDefault();
+		})
+		window.onload = function(){
+			var wrap = document.getElementById('wrap');
+			var list = document.querySelector('#wrap .list');
+			list.innerHTML += list.innerHTML;
+			var liS = document.querySelectorAll('#wrap .list li');
+			
+			var spanS = document.querySelectorAll('#wrap .icons span');
+			var icons = document.querySelectorAll('#wrap .icons');
+			
+			var styleNode = document.createElement('style');
+			styleNode.innerHTML = '#wrap{height: '+ liS[0].offsetHeight +'px;}';
+			styleNode.innerHTML += '#wrap .list{width: '+ liS.length +'00%;}';
+			styleNode.innerHTML += '#wrap .list li{width: '+ 100/liS.length +'%;}';
+			document.head.appendChild(styleNode);
+			
+			var eleX = 0;
+			var startX = 0;
+			var endX = 0;
+			var now = 0;
+			
+			wrap.addEventListener('touchstart',function(event){
+//				eleX = list.offsetLeft;
+				list.style.transition = 'none';
+				if(now == 0){
+					now = spanS.length;
+				}else if(now == liS.length -1 ){
+					now = spanS.length-1;
+				}
+				translateCss(list, 'translateX', -now * document.documentElement.clientX)
+				
+				eleX = translateCss(list, 'translateX');
+				console.log('eleX = '+eleX);
+				startX = event.changedTouches[0].clientX;
+				
+			});
+			wrap.addEventListener('touchmove',function(event){
+				endX = event.changedTouches[0].clientX;
+				var disX = endX - startX;
+//				list.style.left = eleX + translateX + 'px';
+				translateCss(list, 'translateX', disX + eleX);
+			})
+			//手指离开
+			wrap.addEventListener('touchend',function(){
+				now = 0;
+//				var left = list.offsetLeft;
+				var left = translateCss(list, 'translateX');
+				console.log('left = '+left);
+				
+//				now = Math.round(-left/document.documentElement.clientWidth);
+				now = Math.round(-left/document.documentElement.clientWidth);
+				if(now<0){
+					now = 0;
+				}else if(now>liS.length-1){
+					now = liS.length-1;
+				}
+				
+				list.style.transition = '1s';
+				
+				//确定元素最终位置
+				translateCss(list, 'translateX', -document.documentElement.clientWidth * now)
+
+				for(var i=0;i<spanS.length;i++){
+					spanS[i].className = ''
+				}
+				//2.切换倒谁，谁的 class = 'active'
+				spanS[now].className = 'active';
+			})
+		}
+		
+		
+		
+	</script>
+
+</html>

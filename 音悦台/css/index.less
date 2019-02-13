@@ -147,6 +147,57 @@ html,body{
             }
         }
     }
+    //内容
+    #content{
+        //导航
+        .navWrap{
+            box-sizing: border-box;
+            height: 177/@rem;
+            padding: 31/@rem 0 14/@rem;
+//          overflow: hidden;
+            position: relative;
+            .navList{
+//              float: left;
+                position: absolute;
+                
+                //设置li不换行；
+                white-space: nowrap;
+                font-size: 0px;
+                li{
+                    //转换成行内块
+                    display: inline-block;
+                    height: 129/@rem;
+                    padding: 0 38/@rem;
+                    line-height: 129/@rem;
+                    a{
+                        color: #020202;
+                        font-size: 1rem;
+                    }
+                    &.active{
+                        color: #fff;
+                        background: #690;
+                    }
+                }
+            }
+        }
+        //轮播图
+        .lunWrap{
+            position: relative;
+            .listLun{
+                position: absolute;
+                top: 0;
+                left:0;
+                overflow: hidden;
+                li{
+                    float: left;
+                    img{
+                        width: 100%;
+                    }
+                }
+            }
+        }
+        //主题
+    }
     
     
 }
