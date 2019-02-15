@@ -33,7 +33,7 @@
 		transformCss(box,'translateX',200);
 		transformCss(box,'scale',0.5);
 		transformCss(box,'rotate',30);
-//		//读
+////		//读
 		console.log(transformCss(box,'translateX')) //200
 		console.log(transformCss(box,'scale')) //0.5
 		console.log(transformCss(box,'rotate')) //30
@@ -44,7 +44,7 @@
 				node.obj = {};
 				console.log('+++++'+node.obj)
 			}
-			
+//			console.log(arguments)
 			//写
 			//根据实参arguments个数判断读写
 			if(arguments.length > 2){
@@ -59,11 +59,13 @@
 						case 'translateY':
 						case 'translate':
 						case 'translateZ':
+							console.log('i translate = '+i);
 							result += i + '('+ node.obj[i] +'px)';
 							break;
 						case 'scaleX':
 						case 'scaleY':
 						case 'scale':
+						console.log('i scale= '+i);
 							result += i + '('+ node.obj[i] +')';
 							break;
 						case 'skew':
@@ -73,12 +75,14 @@
 						case 'rotateX':
 						case 'rotateY':
 						case 'rotateX':
+						console.log('i rotate= '+i);
 							result += i + '('+ node.obj[i] +'deg)';
 							break;
 					}
 				}
 				
 				node.style.transform = result;
+				
 				
 			}else {
 				//读

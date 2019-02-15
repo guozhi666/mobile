@@ -116,63 +116,18 @@
 						</li>
 					</ul>
 				</nav>
-				<!--轮播图-->
-				<div class="lunWrap">
-					<ul class="listLun">
-						<li>
-							<a href="javascript:;">
-								<img src="img/1.jpg"/>
-							</a>
-						</li>
-						<li>
-							<a href="javascript:;">
-								<img src="img/2.jpg"/>
-							</a>
-						</li>
-						<li>
-							<a href="javascript:;">
-								<img src="img/3.jpg"/>
-							</a>
-						</li>
-						<li>
-							<a href="javascript:;">
-								<img src="img/4.jpg"/>
-							</a>
-						</li>
-						<li>
-							<a href="javascript:;">
-								<img src="img/5.jpg"/>
-							</a>
-						</li>
-			
-					</ul>
-				</div>
+				
 			</section>
 		</section>
 	</body>
+	<script type="text/javascript" src="js/jquery-1.10.1.js"></script>
 	<script type="text/javascript" src="js/changeClass.js"></script>
+	<script type="text/javascript" src="js/transform.js"></script>
 	<script type="text/javascript">
 		//浏览器默认行为
 		document.addEventListener('touchstart', function(event){
 			event.preventDefault();
 		});
-		//适配
-//		(function(){
-//			var width = document.documentElement.clientWidth;
-//			var styleNode = document.createElement('style');
-//			styleNode.innerHTML = 'html{font-size:'+ width/16 +'px !important;}';
-//			document.head.appendChild(styleNode);
-//		})();
-		
-		//点透事件处理
-//		(function(){
-//			var aNodes = document.querySelectorAll('a');
-//			for(var i = 0; i<aNodes.length; i++){
-//				aNodes[i].addEventListener('touchstart', function(){
-//					window.location.href = this.href;
-//				});
-//			};
-//		})();
 		
 		//清除浏览器默认行为：
 		document.addEventListener('touchstart', function(event){
@@ -188,7 +143,7 @@
 			document.head.appendChild(styleNode);
 		})();
 		
-		//点透
+		//点透...
 		(function(){
 			var aNodes = document.querySelectorAll('a');
 			for(var i = 0; i<aNodes.length; i++){
@@ -252,22 +207,41 @@
 			})
 		}
 		
+		
 		//导航栏拖动
 		navDrag();
 		function navDrag(){
 			var navWrap = document.querySelector('#wrap #content .navWrap');
 			var navList = document.querySelector('#wrap #content .navWrap .navList');
-			
+			var liNodes = document.querySelectorAll('#wrap #content .navWrap .navList li');
 			//获取初始位置
 			var eleX = 0;
 			//获取开始位置；
 			var startX = 0;
 			//获取结束位置;
 			var endX = 0
+			
+			var s1 = 0;
+			var s2 = 0;
+			var t1 = 0;
+			var t2 = 0;
+			var disS = 0;
+			var disT = 1;
+			
+			
 			//手指按下
 			navWrap.addEventListener('touchstart', function(event){
-				eleX = navList.offsetLeft;
+				eleX = translateCss(navList, 'translateX');
 				startX = event.changedTouches[0].clientX;
+				navList.style.transition = 'none';
+				disS = 0;
+				
+				s1 = eleX;
+				t1 = new Date().getTime();
+				
+				//点击切换
+				
+//				
 			})
 			
 			//滑动导航栏
@@ -275,51 +249,79 @@
 				endX = event.changedTouches[0].clientX;
 				//距离差
 				disX = endX - startX;
-				var navLeft = disX + eleX;
-				
+				var translateX = disX + eleX;
+//				console.log(translateX);
 				//判定范围
-				if(navLeft > 0){
-					navLeft = 0;
-				}else if(navLeft < document.documentElement.clientWidth - navList.offsetWidth){
-					navLeft = document.documentElement.clientWidth - navList.offsetWidth
+				if(translateX > 0){
+					//越来越难托， translateX越大，比例越小；
+					var scale = 0.8 - translateX/(document.documentElement.clientWidth*2);
+					//新的左边留白 = 旧的左边留白 * scale
+					//新的translateX = 临界值 + 新的左边留白
+					translateX = 0 + scale * translateX; 
+				}else if(translateX < document.documentElement.clientWidth - navList.offsetWidth){
+					//右边留白(正值) = translateX - 临界值
+					var over = Math.abs(translateX) - Math.abs(document.documentElement.clientWidth - navList.offsetWidth);
+					//确定比例
+					var scale = 0.8 - over/(document.documentElement.clientWidth*2);
+					translateX = -Math.abs(document.documentElement.clientWidth - navList.offsetWidth) - over * scale;
+//					translateX = document.documentElement.clientWidth - navList.offsetWidth
 				}
 					
-				navList.style.left = navLeft + 'px';
+//				navList.style.left = translateX + 'px';
+				translateCss(navList, 'translateX', translateX);
+				//确定结束时间和位置
+				s2 = translateX;
+				t2 = new Date().getTime();
+				
+				disS = s2 - s1;
+				disT = t2 - t1;
+			})
+			navWrap.addEventListener('touchend', function(){
+				//确定速度
+				var speed = disS/disT;
+				
+				//元素目标位置 = touchend走的路程 + 速度走的路程
+				var target = translateCss(navList, 'translateX') + speed*100; 
+				
+				//贝塞尔曲线
+				var bezier = '';
+				if(target > 0){
+					target = 0;
+					bezier = 'cubic-bezier(.05,1.31,.9,1.53)';
+				}else if(target < document.documentElement.clientWidth - navList.offsetWidth){
+					target = document.documentElement.clientWidth - navList.offsetWidth;
+					bezier = 'cubic-bezier(.05,1.31,.9,1.53)';
+				}
+				navList.style.transition = '1s '+ bezier;
+				
+				translateCss(navList, 'translateX', target);
+				
 			})
 			
 		}
 		
-		//轮播滑动
-		changeLunbo();
-		function changeLunbo(){
-			window.onload = function(){
-				var lunWrap = document.querySelector('#wrap #content .lunWrap');
-				var listLun = document.querySelector('#wrap #content .lunWrap .listLun');
-				var liNodeS = document.querySelectorAll('#wrap #content .lunWrap .listLun li');
-				
-				var styleLun = document.createElement('style');
-				styleLun.innerHTML = '#wrap #content .lunWrap .listLun{width:'+ liNodeS.length +'00%;}';
-				styleLun.innerHTML += '#wrap #content .lunWrap .listLun li{width:'+ 100/liNodeS.length +'%;}';
-				document.head.appendChild(styleLun);
-				
-				var eleX = 0;
-				var startX = 0;
-				var endX = 0;
-				var disX = 0;
-				
-				lunWrap.addEventListener('touchstart',function(event){
-					eleX = listLun.offsetLeft;
-					startX = event.changedTouches[0].clientX;
+		//点击变色
+		changeClass();
+		function changeClass(){
+			var liNodes = document.querySelectorAll('#wrap #content .navWrap .navList li');
+			
+			for(var i = 0; i<liNodes.length; i++){
+				var isMove = false;
+				liNodes[i].addEventListener('touchmove', function(){
+					isMove = true;
 				})
-				lunWrap.addEventListener('touchmove', function(event){
-					endX = event.changedTouches[0].clientX;
-					disX = endX - startX;
-					var lastS = disX + eleX;
-					listLun.style.left = lastS;
+				liNodes[i].addEventListener('touchend',function(){
+					if(!isMove){
+						for(var j = 0; j<liNodes.length; j++){
+							liNodes[j].className = '';
+						}
+						this.className = 'active';
+					}
+					isMove = false;
 				})
 			}
-			
 		}
+		
 		
 	</script>
 </html>

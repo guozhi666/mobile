@@ -30,8 +30,8 @@ body {
   position: absolute;
   top: 0;
   left: 0;
-  z-index: 2;
   background: #232323;
+  z-index: 50;
 }
 #wrap #header .headerTop {
   width: 16rem;
@@ -87,11 +87,11 @@ body {
   font-weight: bold;
   border-radius: 0.14814815rem;
 }
-#wrap #header .headerbottom {
+#wrap #header .search {
   height: 1.52592593rem;
   padding: 0.23703704rem;
 }
-#wrap #header .headerbottom input[type="text"] {
+#wrap #header .search input[type="text"] {
   float: left;
   box-sizing: border-box;
   width: 12.28148148rem;
@@ -99,24 +99,24 @@ body {
   background: #999;
   padding: 0.07407407rem 0.14814815rem;
   border: 0.01481481rem solid #5a5a5a;
-  font-size: 0.66666667rem;
+  font-size: 0.60740741rem;
   color: #333;
   border-radius: 0.22222222rem 0 0 0.22222222rem;
 }
-#wrap #header .headerbottom input[type="text"]:focus {
+#wrap #header .search input[type="text"]:focus {
   background: #fff;
 }
-#wrap #header .headerbottom input[type="text"]::-webkit-input-placeholder {
+#wrap #header .search input[type="text"]::-webkit-input-placeholder {
   color: #333;
 }
-#wrap #header .headerbottom input[type='submit'] {
+#wrap #header .search input[type="submit"] {
   float: right;
   width: 3.00740741rem;
   height: 1.52592593rem;
+  border: none;
   background: #414040;
   color: #fff;
   font-size: 0.60740741rem;
-  border: none;
   border-radius: 0 0.22222222rem 0.22222222rem 0;
 }
 #wrap #header .mask {
@@ -134,12 +134,15 @@ body {
   width: 22.5%;
   height: 2rem;
   line-height: 2rem;
+  font-size: 0.8rem;
   text-align: center;
   font-weight: bold;
-  font-size: 0.8rem;
 }
 #wrap #header .mask li a {
   color: #fff;
+}
+#wrap #content {
+  padding-top: 4rem;
 }
 #wrap #content .navWrap {
   box-sizing: border-box;
@@ -155,14 +158,141 @@ body {
 #wrap #content .navWrap .navList li {
   display: inline-block;
   height: 1.91111111rem;
-  padding: 0 0.56296296rem;
   line-height: 1.91111111rem;
+  padding: 0 0.56296296rem;
+  font-size: 1rem;
 }
 #wrap #content .navWrap .navList li a {
   color: #020202;
-  font-size: 1rem;
 }
 #wrap #content .navWrap .navList li.active {
-  color: #fff;
   background: #690;
+}
+#wrap #content .navWrap .navList li.active a {
+  color: #fff;
+}
+#wrap #content .banWrap {
+  position: relative;
+}
+#wrap #content .banWrap .banList {
+  position: absolute;
+  top: 0;
+  left: 0;
+  overflow: hidden;
+}
+#wrap #content .banWrap .banList li {
+  float: left;
+}
+#wrap #content .banWrap .banList li img {
+  width: 100%;
+}
+#wrap #content .banWrap .banIcons {
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  text-align: center;
+}
+#wrap #content .banWrap .banIcons span {
+  display: inline-block;
+  width: 10px;
+  height: 10px;
+  background: gray;
+  border-radius: 50%;
+}
+#wrap #content .banWrap .banIcons span.active {
+  background: deeppink;
+}
+#wrap #content .tab {
+  width: 15.4962963rem;
+  background: #fff;
+  margin: 0 auto;
+  overflow: hidden;
+}
+#wrap #content .tab .tabHeader {
+  height: 2rem;
+  line-height: 2rem;
+}
+#wrap #content .tab .tabHeader h3 {
+  float: left;
+  font-size: 1rem;
+}
+#wrap #content .tab .tabHeader a {
+  float: right;
+  color: #000;
+  font-size: 0.6rem;
+}
+#wrap #content .tab .tabNav {
+  height: 1.55555556rem;
+  line-height: 1.55555556rem;
+  position: relative;
+}
+#wrap #content .tab .tabNav a {
+  float: left;
+  width: 1.77777778rem;
+  height: 1.55555556rem;
+  font-size: 0.65185185rem;
+  text-align: center;
+  color: #6b6b6b;
+}
+#wrap #content .tab .tabNav .smallGreen {
+  position: absolute;
+  bottom: 3px;
+  left: 0;
+  width: 1.77777778rem;
+  height: 0.13333333rem;
+  background: #6f900d;
+}
+#wrap #content .tab .tabWrap {
+  overflow: hidden;
+  width: 300%;
+}
+#wrap #content .tab .tabWrap ul {
+  float: left;
+  width: 33.333333%;
+}
+#wrap #content .tab .tabWrap .tabLoading {
+  height: 1.4962963rem;
+  opacity: 0;
+  background-image: url(../img/loading.gif);
+  background-repeat: no-repeat;
+  background-position: center;
+}
+#wrap #content .tab .tabWrap .tabList {
+  overflow: hidden;
+}
+#wrap #content .tab .tabWrap .tabList li {
+  float: left;
+  box-sizing: border-box;
+  width: 7.4962963rem;
+  margin: 0.11851852rem;
+  padding: 0.07407407rem;
+  font-size: 0.59259259rem;
+  background: #efefef;
+}
+#wrap #content .tab .tabWrap .tabList li a {
+  color: #000;
+}
+#wrap #content .tab .tabWrap .tabList li a img {
+  width: 100%;
+}
+#wrap #content .tab .tabWrap .tabList li .ice {
+  overflow: hidden;
+}
+#wrap #content .tab .tabWrap .tabList li .ice .left {
+  float: left;
+}
+#wrap #content .tab .tabWrap .tabList li .ice .right {
+  float: left;
+}
+#wrap #content .tab .tabWrap .tabList li .ice .right .icePic {
+  background-position: 2px -14px;
+}
+#wrap #content .tab .tabWrap .tabList li .ice .icePic {
+  display: inline-block;
+  width: 20px;
+  height: 17px;
+  background-image: url(../img/ice.png);
+  background-repeat: no-repeat;
+  background-position: 2px 6px;
 }

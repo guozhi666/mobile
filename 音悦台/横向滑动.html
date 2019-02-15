@@ -73,27 +73,27 @@
 			<ul class="list">
 				<li>
 					<a href="javascript:;">
-						<img src="img/1.jpg" />
+						<img src="img/a.jpg" />
 					</a>
 				</li>
 				<li>
 					<a href="javascript:;">
-						<img src="img/2.jpg" />
+						<img src="img/b.jpg" />
 					</a>
 				</li>
 				<li>
 					<a href="javascript:;">
-						<img src="img/3.jpg" />
+						<img src="img/c.jpg" />
 					</a>
 				</li>
 				<li>
 					<a href="javascript:;">
-						<img src="img/4.jpg" />
+						<img src="img/d.jpg" />
 					</a>
 				</li>
 				<li>
 					<a href="javascript:;">
-						<img src="img/5.jpg" />
+						<img src="img/e.jpg" />
 					</a>
 				</li>
 			</ul>
@@ -136,12 +136,13 @@
 			wrap.addEventListener('touchstart',function(event){
 //				eleX = list.offsetLeft;
 				list.style.transition = 'none';
+				
 				if(now == 0){
 					now = spanS.length;
 				}else if(now == liS.length -1 ){
 					now = spanS.length-1;
 				}
-				translateCss(list, 'translateX', -now * document.documentElement.clientX)
+				translateCss(list, 'translateX', -now * document.documentElement.clientWidth)
 				
 				eleX = translateCss(list, 'translateX');
 				console.log('eleX = '+eleX);
@@ -176,9 +177,11 @@
 
 				for(var i=0;i<spanS.length;i++){
 					spanS[i].className = ''
+//					console.log('1')
 				}
+//				console.log(spanS[now].className);
 				//2.切换倒谁，谁的 class = 'active'
-				spanS[now].className = 'active';
+				spanS[now%5].className = 'active';
 			})
 		}
 		
