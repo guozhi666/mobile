@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=no" />
+		<link rel="stylesheet" type="text/css" href="css/index.css" />
+		<title></title>
+	</head>
+
+	<body>
+		<section class="boyWrap">
+			<!--头部-->
+			<section id="wrap">
+				<!--//上部-->
+				<section class="top">
+					电影购票
+				</section>
+				<div class="center">
+					<a href="javascript:;" class="city">
+						<span>广州</span>
+						<img src="img/Triangle.png" alt="" />
+					</a>
+					<span class="xingG">星光大道测试影院</span>
+
+					<a href="javascript:;" class="select">
+						<img src="img/nav_filter.png" />
+					</a>
+				</div>
+
+				<!--滚动图片-->
+				<a href="javascript:;" class="imgs">
+					<img src="img/banner.png" alt="" />
+				</a>
+
+				<!--导航底部-->
+				<div class="footer">
+					<a href="javascript:;">
+						<span>正在热映</span>
+						<div class="icon">
+
+						</div>
+					</a>
+					<a href="javascript:;">
+						<span>即将热映</span>
+					</a>
+				</div>
+			</section>
+			
+			<!--内容content-->
+			<section class="content">
+				<div class="infor">
+					<a href="javascript:;">
+						<img src="" alt="" />
+					</a>
+					<a href="javascript:;">
+						
+					</a>
+					<a href="javascript:;">
+						
+					</a>
+				</div>
+				<div class="times">
+					
+				</div>
+			</section>
+			<!--地址-->
+
+			<!--底部-->
+		</section>
+		
+	</body>
+	<script type="text/javascript">
+		//清除浏览器默认样式
+		document.addEventListener('touchstart', function(event) {
+			event.stopPropagation();
+		});
+
+		//适配
+		(function() {
+			var width = document.documentElement.clientWidth;
+			var styleNode = document.createElement('style');
+			styleNode.innerHTML = 'html{font-size: ' + width / 16 + 'px;}';
+			document.head.appendChild(styleNode);
+		})();
+
+		//点透
+		(function() {
+			var aNodes = document.querySelectorAll('a');
+			for(var i = 0; i < aNodes.length; i++) {
+				aNodes[i].addEventListener('touchstart', function() {
+					window.location.href = this.href;
+				});
+			};
+		})();
+	</script>
+
+</html>
